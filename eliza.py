@@ -72,7 +72,6 @@ class Eliza:
                     key.decomps.append(decomp)
                 elif tag == 'reasmb':
                     parts = content.split(' ')
-                    print(parts)
                     decomp.reasmbs.append(parts)
 
     def _match_decomp_r(self, parts, words, results):

@@ -20,6 +20,14 @@ def startScreen(FPSCLOCK):
     """Display the start screen (which has the title and instructions)
     until the player presses a key. Returns None."""
 
+    playlist = list()
+    playlist.append ('assets/shooting_stars.mp3')
+
+    pygame.mixer.init()
+    pygame.mixer.music.load ( playlist.pop() )  
+    pygame.mixer.music.set_endevent ( pygame.USEREVENT )  
+    pygame.mixer.music.play(-1)           
+
     renderStartScreen()
 
     while True: # Main loop for the start screen.

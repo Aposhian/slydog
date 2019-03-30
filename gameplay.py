@@ -24,7 +24,7 @@ def startScreen(FPSCLOCK):
     playlist = list()
     playlist.append ('assets/shooting_stars.mp3')
     pygame.mixer.init()
-    pygame.mixer.music.load (playlist.pop())  
+    pygame.mixer.music.load (playlist.pop())
     pygame.mixer.music.set_endevent (pygame.USEREVENT)  
     pygame.mixer.music.play(-1)           
 

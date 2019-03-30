@@ -44,23 +44,24 @@ class OutputBox:
 
     def handle_event(self, game_state, characterIndex, event):
         #load the next dialogue text if available
-        if event.type == pygame.KEYDOWN:   
-            if event.key == pygame.K_q:
-                self.text = ""
-                # erase the text
-                pygame.draw.rect(DISPLAYSURF, (50,50,50), self.rect)
-                if game_state.currentDialogue <= len(game_state.script):
-                    for letter in game_state.response_script[game_state.currentDialogue]:
-                        self.text = self.text + letter
+        #if event.type == pygame.KEYDOWN:   
+        #if event.key == pygame.K_q:
+        #    self.text = ""
+        #    # erase the text
+        #    pygame.draw.rect(DISPLAYSURF, (50,50,50), self.rect)
+        #    if game_state.currentDialogue <= len(game_state.response_script):
+        #        for letter in game_state.response_script[game_state.currentDialogue]:
+        #            self.text = self.text + letter
 
-                    # Re-render the text.
-                    self.txt_surface = self.FONT.render(self.text, True, self.color)
-                    #    time.sleep(.1)
+        #        # Re-render the text.
+        #        self.txt_surface = self.FONT.render(self.text, True, self.color)
+        #        #    time.sleep(.1)
 
-                    game_state.currentDialogue += 1
-                else:
-                    bob = True
-                    #what to do when they are done talking?
+        #        game_state.currentDialogue += 1
+        #    else:
+        #        bob = True
+                #what to do when they are done talking?
+        pass
 
     def update(self):
         global backspaceStart
@@ -135,7 +136,7 @@ class InputBox:
                 self.txt_surface = self.FONT.render(self.text, True, self.color)
 
     def draw(self, screen):
-
+        pygame.draw.rect(screen, (50,50,50), self.rect) 
         # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         # Blit the rect.

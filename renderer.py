@@ -41,7 +41,7 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert()
               'tall tree': pygame.image.load('assets/Tree_Tall.png'),
               'ugly tree': pygame.image.load('assets/Tree_Ugly.png'),
               'chair': pygame.image.load('assets/chair sprite.png'),
-              'middle_wall': pygame.image.load('assets/Wood_Block_Tall.png'),       
+              'middle_wall': pygame.image.load('assets/newwall.png'),       
               'chairFlip': pygame.transform.flip(pygame.image.load('assets/nervous_sprite.png'), True, False)}
 
 # These dict values are global, and map the character that appears
@@ -114,7 +114,7 @@ def drawMap(game_state):
     # Surface object. First, the width and height must be calculated.
     mapSurfWidth = len(game_state.map) * TILEWIDTH
     mapSurfHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
-    mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight), pygame.SRCALPHA, 32)
+    mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight + 100), pygame.SRCALPHA, 32)
 
     # Draw the tile sprites onto this surface.
     for x in range(len(game_state.map)):
@@ -125,6 +125,8 @@ def drawMap(game_state):
             elif game_state.map[x][y] in OUTSIDEDECOMAPPING:
                 baseTile = TILEMAPPING[' ']
 
+            if baseTile.get_size()[1] > TILEHEIGHT:
+                spaceRect.y -= baseTile.get_size()[1] - TILEHEIGHT
             # First draw the base ground/wall tile.
             mapSurf.blit(baseTile, spaceRect)
 

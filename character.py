@@ -3,6 +3,7 @@ from eliza import Eliza
 class Character:
     def __init__(self, name, avatar, sprite, scriptfile):
         self.name = name
+        self.coordinates = (0,0)
         self.avatar = avatar
         self.sprite = sprite
         self.eliza = Eliza()
@@ -19,11 +20,3 @@ class Character:
     def initiateDialogue(self, gameState):
         # Put main function of textbox here
         pass
-
-"""
-    class OutputBox:
-        # Call eliza.respond(input)
-    
-    class InputBox:
-    
-"""

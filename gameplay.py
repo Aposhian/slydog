@@ -44,6 +44,13 @@ def startScreen(FPSCLOCK):
         FPSCLOCK.tick()
 
 def getCharacterFacing():
+    index = 0
+    for character in game_state.characters:
+        xc, yc = character.coordinates
+        xp, yp = game_state.player_pos
+        if (abs(xc - xp) == 1 and yc == yp) or (abs(yc - yp) == 1 and xc == xp):
+            return index
+        index += 1
     pass
 
 def main(game_state):
@@ -167,7 +174,7 @@ def isWall(mapObj, x, y):
 
     if x < 0 or x >= len(mapObj) or y < 0 or y >= len(mapObj[x]):
         return False # x and y aren't actually on the map.
-    elif mapObj[x][y] in ('#', 'x', 'L', 'J', 'W'):
+    elif mapObj[x][y] in ('#', 'x', 'L', 'J', 'W', 'm', 'g', 'n', 'r', 't'):
         return True # wall is blocking
     return False
 

@@ -82,7 +82,7 @@ def overlay(game_state, characterIndex):
         pygame.display.update()
         time.sleep(.00001)
     # Blit character avatar
-    # DISPLAYSURF.blit(IMAGESDICT[game_state.characters[characterIndex].avatar], (0, 0))
+    DISPLAYSURF.blit(IMAGESDICT[game_state.characters[characterIndex].avatar], (0, 0))
 
 def render(game_state, mapSurf, mapNeedsRedraw):
 

@@ -155,7 +155,7 @@ def isWall(mapObj, x, y):
 
     if x < 0 or x >= len(mapObj) or y < 0 or y >= len(mapObj[x]):
         return False # x and y aren't actually on the map.
-    elif mapObj[x][y] in ('#', 'x', 'L', 'J'):
+    elif mapObj[x][y] in ('#', 'x', 'L', 'J', 'W'):
         return True # wall is blocking
     return False
 

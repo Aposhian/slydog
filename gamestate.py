@@ -106,7 +106,8 @@ class InputBox:
                     # here is where a character's eliza responds
                     self.response_script[1] = game_state.characters[characterIndex].eliza.respond(self.text)
                     if self.response_script[1] == "RUN_NEURAL_NETWORK":
-                        evaluateSingleSample('hi there', game_state.beam_size, game_state.encoder, game_state.decoder, game_state.voc)
+                        self.response_script[1] = evaluateSingleSample('hi there', game_state.beam_size, game_state.encoder, game_state.decoder, game_state.voc)
+                    print(self.response_script[1])
                     self.text = ''
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]

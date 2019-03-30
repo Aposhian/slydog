@@ -1,6 +1,7 @@
 import logging
 import random
 import re
+import string
 from collections import namedtuple
 
 log = logging.getLogger(__name__)
@@ -71,6 +72,7 @@ class Eliza:
                     key.decomps.append(decomp)
                 elif tag == 'reasmb':
                     parts = content.split(' ')
+                    print(parts)
                     decomp.reasmbs.append(parts)
 
     def _match_decomp_r(self, parts, words, results):
@@ -115,8 +117,10 @@ class Eliza:
         for reword in reasmb:
             if not reword:
                 continue
-            if reword[0] == '(' and reword[-1] == ')':
-                index = int(reword[1:-1])
+            match = re.search('\([0-9]+\)',reword)
+            if match:
+                wildcard = match.group(0)
+                index = int(wildcard[1:-1])
                 if index < 1 or index > len(results):
                     raise ValueError("Invalid result index {}".format(index))
                 insert = results[index - 1]
@@ -212,6 +216,8 @@ class Eliza:
 
         while True:
             sent = input('> ')
+            # Strip out punctuation
+            sent = sent.translate(str.maketrans('', '', string.punctuation))
 
             output = self.respond(sent)
             if output is None:
@@ -224,7 +230,7 @@ class Eliza:
 
 def main():
     eliza = Eliza()
-    eliza.load('doctor.txt')
+    eliza.load('new.txt')
     eliza.run()
 
 if __name__ == '__main__':

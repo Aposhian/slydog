@@ -31,7 +31,6 @@ class OutputBox:
         self.active = False
 
     def scrolling(self, args):
-        #myself = args.self
         dialogue = args.dialogue
         letter_i = args.letter_i
 
@@ -40,16 +39,12 @@ class OutputBox:
         # Re-render the text.
         self.txt_surface = self.FONT.render(self.text, True, self.color)
 
-        if len(self.text) < len(dialogue):
-            #time.sleep(.5)
-            #self.scrolling(dialogue, letter_i+1)
-            
-            t = Timer(0.5, self.scrolling(), args=(self, dialogue, letter_i+1)).start()
+        # if len(self.text) < len(dialogue):
+        #     t = Timer(0.5, self.scrolling(), args=(self, dialogue, letter_i+1)).start()
 
     def handle_event(self, game_state, event):
         #load the next dialogue text if available
         if event.type == pygame.KEYDOWN:   
-  
             if event.key == pygame.K_q:
                 self.text = ""
                 # erase the text

@@ -47,6 +47,7 @@ class GameState:
         self.distance_to_bbX = 0
         self.distance_to_bbY = 0
         self.BOUNDING_BOX_RADIUS = 4
+        self.background_scroll_x = 0
 
     @property
     def outOfBBX(self):

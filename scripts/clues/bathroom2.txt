@@ -30,10 +30,11 @@ key: {bathroom}
     decomp: *
         reasmb: Hey, {bathroom} looks really sick.
 
-key: {unusual}
+key: unusual
     decomp: see *
         reasmb: Hey, {bathroom} looks really sick.
     decomp: notice *
         reasmb: Hey, {bathroom} looks really sick.
     decomp: *
         reasmb: Hey, {bathroom} looks really sick.
+        

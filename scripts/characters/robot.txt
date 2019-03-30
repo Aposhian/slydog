@@ -14,3 +14,8 @@ key: can
         reasmb: That is impossible for my class of robot.
     decomp: fly *
         reasmb: That is impossible for my class of robot.
+
+key: xnone
+    decomp: *
+        reasmb: RUN_NEURAL_NETWORK
+        

@@ -11,6 +11,7 @@ from pygame.locals import *
 
 from renderer import DISPLAYSURF
 from renderer import WINHEIGHT, WINWIDTH
+from evaluate import evaluateSingleSample
 
 # For textboxes
 COLOR_INACTIVE = pygame.Color('lightskyblue3')
@@ -104,6 +105,10 @@ class InputBox:
                     self.response_script = {}
                     # here is where a character's eliza responds
                     self.response_script[1] = game_state.characters[characterIndex].eliza.respond(self.text)
+                    if self.response_script[1] == "RUN_NEURAL_NETWORK":
+                        self.response_script[1] = evaluateSingleSample('hi there', game_state.beam_size, game_state.encoder, game_state.decoder, game_state.voc)
+                    self.response_script[1] = re.sub('\<EOS\>', '', self.response_script[1])
+                    print(self.response_script[1])
                     self.text = ''
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
@@ -160,7 +165,7 @@ class GameState:
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
             ['W', 'W', 'W', ' ', ' ', 'W', 'W', 'W'],
-            ['#', 'J', 'J', ' ', ' ', 'g', 'J', '#'],
+            ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
@@ -180,7 +185,7 @@ class GameState:
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
+            ['#', 'g', 'L', ' ', ' ', 'L', 'L', '#'],
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
@@ -206,6 +211,11 @@ class GameState:
         self.cameraOffsetY = 0
         self.currentImg = "down"
 
+        self.beam_size = None
+        self.encoder = None
+        self.decoder = None
+        self.voc = None
+
         self.distance_to_bbX = 0
         self.distance_to_bbY = 0
         self.BOUNDING_BOX_RADIUS = 4
@@ -218,13 +228,13 @@ class GameState:
         self.text_boxes = [output_box, input_box2]
 
         self.characters = [
-            Character("Robby", "assets/robot.png", "assets/robot_sprite.png", "scripts/characters/robot.txt"),
-            Character("Alicia", "assets/girl.png", "assets/girl_sprite.png", "scripts/characters/girl.txt"),
-            Character("George", "assets/monster.png", "assets/monster_sprite.png", "scripts/characters/monster.txt"),
-            Character("Alfred", "assets/nervous.png", "assets/nervous_sprite.png", "scripts/characters/nervous.txt"),
-            Character("Mark", "assets/trenchcoat.png", "assets/trenchcoat_sprite.png", "scripts/characters/trenchcoat.txt")
+            Character("Robby", "robot_avatar", "assets/robot_sprite.png", "scripts/characters/robot.txt"),
+            Character("Alicia", "girl_avatar", "assets/girl_sprite.png", "scripts/characters/girl.txt"),
+            Character("George", "monster_avatar", "assets/monster_sprite.png", "scripts/characters/monster.txt"),
+            Character("Alfred", "nervous_avatar", "assets/nervous_sprite.png", "scripts/characters/nervous.txt"),
+            Character("Mark", "trenchcoat_avatar", "assets/trenchcoat_sprite.png", "scripts/characters/trenchcoat.txt")
         ]
-        #self.initCharacters()
+        self.initCharacters()
 
     @property
     def outOfBBX(self):

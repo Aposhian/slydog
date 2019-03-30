@@ -26,3 +26,8 @@ key: bugs
 key: dog
     decomp: *
         reasmb: Nice doggy!!
+
+key: xnone
+    decomp: *
+        reasmb: RUN_NEURAL_NETWORK
+        

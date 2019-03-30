@@ -36,10 +36,15 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert()
               'princessR': pygame.image.load('assets/dogspriteright.png'),
               'princessBack': pygame.image.load('assets/dogspriteback.png'),
               'monster': pygame.image.load('assets/monster_sprite.png'),
+              'monster_avatar': pygame.image.load('assets/monsterman.png'),
               'girl': pygame.image.load('assets/girl_sprite.png'),
+              'girl_avatar': pygame.image.load('assets/girl_character.png'),
               'nervous': pygame.image.load('assets/nervous_sprite.png'),
+              'nervous_avatar': pygame.image.load('assets/nervousguy.png'),
               'trenchcoat': pygame.image.load('assets/trenchcoat_sprite.png'),
+              'trenchcoat_avatar': pygame.image.load('assets/shadyman.png'),
               'robot': pygame.image.load('assets/robot_sprite.png'),
+              'robot_avatar': pygame.image.load('assets/robotguy.png'),
               'boy': pygame.image.load('assets/boy.png'),
               'rock': pygame.image.load('assets/Rock.png'),
               'short tree': pygame.image.load('assets/Tree_Short.png'),
@@ -92,7 +97,8 @@ def overlay(game_state, characterIndex):
         pygame.display.update()
         time.sleep(.00001)
     # Blit character avatar
-    # DISPLAYSURF.blit(IMAGESDICT[game_state.characters[characterIndex].avatar], (0, 0))
+    DISPLAYSURF.blit(IMAGESDICT[game_state.characters[characterIndex].avatar], (0, 0))
+    pygame.display.update()
 
 def render(game_state, mapSurf, mapNeedsRedraw):
 

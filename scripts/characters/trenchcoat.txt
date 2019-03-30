@@ -15,3 +15,8 @@ key: look
 key: dog
     decomp: *
         reasmb: You are a sly dog. I like that.
+
+key: xnone
+    decomp: *
+        reasmb: RUN_NEURAL_NETWORK
+        

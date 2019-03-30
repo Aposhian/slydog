@@ -24,12 +24,12 @@ pygame.display.set_caption('Sly Dog')
 
 # A global dict value that will contain all the Pygame
 # Surface objects returned by pygame.image.load().
-IMAGESDICT = {'bkgd': pygame.image.load('assets/backexample.jpg').convert(),
+IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert(),
               'covered goal': pygame.image.load('assets/Selector.png'),
               'corner': pygame.image.load('assets/Wall_Block_Tall.png'),
-              'wall': pygame.image.load('assets/Wood_Block_Tall.png'),
+              'wall': pygame.image.load('assets/wallspriteleft.png'),
               'inside floor': pygame.image.load('assets/Plain_Block.png'),
-              'outside floor': pygame.image.load('assets/Grass_Block.png'),
+              'outside floor': pygame.image.load('assets/floor tile.png'),
               'title': pygame.image.load('assets/star_title.png'),
               'princess': pygame.image.load('assets/dogspritefront.png'),
               'princessL': pygame.image.load('assets/dogspriteleft.png'),
@@ -40,8 +40,9 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/backexample.jpg').convert(),
               'short tree': pygame.image.load('assets/Tree_Short.png'),
               'tall tree': pygame.image.load('assets/Tree_Tall.png'),
               'ugly tree': pygame.image.load('assets/Tree_Ugly.png'),
-              'chair': pygame.image.load('assets/chair sprite.png'),
-              'chairFlip': pygame.transform.flip(pygame.image.load('assets/chair sprite.png'), True, False)}
+              'chair': pygame.image.load('assets/nervous_sprite.png'),
+              'middle_wall': pygame.image.load('assets/Wood_Block_Tall.png'),       
+              'chairFlip': pygame.transform.flip(pygame.image.load('assets/nervous_sprite.png'), True, False)}
 
 # These dict values are global, and map the character that appears
 # in the level file to the Surface object it represents.
@@ -50,6 +51,7 @@ TILEMAPPING = {'x': IMAGESDICT['corner'],
                'o': IMAGESDICT['inside floor'],
                ' ': IMAGESDICT['outside floor'],
                'L': IMAGESDICT['chair'],
+               'W': IMAGESDICT['middle_wall'],
                'J': IMAGESDICT['chairFlip']}
 OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],
                       '2': IMAGESDICT['short tree'],
@@ -68,7 +70,7 @@ OUTSIDE_DECORATION_PCT = 20
 
 BRIGHTBLUE = (  0, 170, 255)
 WHITE      = (255, 255, 255)
-BGCOLOR = BRIGHTBLUE
+BGCOLOR = (0,0,0)
 TEXTCOLOR = WHITE
 
 def overlay():
@@ -112,8 +114,7 @@ def drawMap(game_state):
     # Surface object. First, the width and height must be calculated.
     mapSurfWidth = len(game_state.map) * TILEWIDTH
     mapSurfHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
-    mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight))
-    mapSurf.fill(BGCOLOR) # start with a blank color on the surface.
+    mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight), pygame.SRCALPHA, 32)
 
     # Draw the tile sprites onto this surface.
     for x in range(len(game_state.map)):

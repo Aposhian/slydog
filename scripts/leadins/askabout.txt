@@ -1,0 +1,7 @@
+key: how
+    decomp: how are you
+        reasmb: I'm doing great. Thanks for asking!
+    decomp: how is *
+        reasmb: (1) is doing pretty well, thanks!
+    decomp: how do you *?
+        reasmb: I * alright, thanks.

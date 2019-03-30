@@ -1,0 +1,70 @@
+initial: What's up dude?
+final: I'll see you later bro!
+
+quit: bye
+quit: goodbye
+quit: see ya
+quit: see you later
+
+pre: dont don't
+pre: cant can't
+pre: wont won't
+pre: maybe perhaps
+pre: certainly yes
+pre: sure yes
+pre: okay yes
+pre: were was
+pre: you're you are
+pre: i'm i am
+pre: going go
+pre: what's what is
+pre: whats what is
+pre: who's who is
+pre: where's where is
+pre: why's why is
+pre: when's when is
+pre: how's how is
+
+synon: drink coke water pepsi soda pop juice milk
+synon: food hamburger pizza pasta spagetti sandwich rice bread fried
+synon: bomb explosives explosive
+
+key: how
+    decomp: how did * get *
+        reasmb: (1) just showed up (2).
+
+key: where
+    decomp: *
+        reasmb: On the train, of course.
+
+key: what
+    decomp: *
+        reasmb:
+    decomp: * your name *
+        reasmb: My name is Joe.
+
+key: when
+    decomp: *
+        reasmb: I can't remember. It was so long ago.
+
+key: why
+    decomp: *
+        reasmb: Why not?
+
+key: who
+    decomp: * @bomb *
+        reasmb: I don't know. Does someone have a bomb?!
+    decomp: * your @food *
+        reasmb: I don't know, but I suspect my coworker...
+
+key: xdontcare
+    decomp: *
+        reasmb: I couldn't care less.
+        reasmb: Why are you telling me?
+        reasmb: Hmm.
+
+key: xnone
+    decomp: *
+        reasmb: I don't understand.
+        reasmb: Sorry, I didn't catch that.
+        reasmb: What are you saying?

@@ -1,6 +1,7 @@
 import sys
 import pygame
 from pygame.locals import *
+import time
 
 from gamestate import GameState
 from renderer import render, renderStartScreen, TILEWIDTH, TILEHEIGHT, TILEFLOORHEIGHT
@@ -50,10 +51,12 @@ def main(game_state):
     MAX_CAM_X_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
 
     # initialize_render(game_state)
+    playerMoveTo = None
 
     while True: # main game loop
         # Reset these variables:
-        playerMoveTo = None
+        if game_state.stillMoving:
+            time.sleep(0.2)
 
         for event in pygame.event.get(): # event handling loop
             if event.type == QUIT:
@@ -65,20 +68,29 @@ def main(game_state):
                 if event.key == K_LEFT:
                     playerMoveTo = LEFT
                     game_state.currentImg = "left"
+                    game_state.stillMoving = True
                 elif event.key == K_RIGHT:
                     playerMoveTo = RIGHT
                     game_state.currentImg = "right"
+                    game_state.stillMoving = True
                 elif event.key == K_UP:
                     playerMoveTo = UP
                     game_state.currentImg = "up"
+                    game_state.stillMoving = True
                 elif event.key == K_DOWN:
                     playerMoveTo = DOWN
                     game_state.currentImg = "down"
-                
+                    game_state.stillMoving = True
+                #elif event.key == K_ESCAPE:
+                #    terminate() # Esc key quits.
+            elif event.type == KEYUP:
+                # Handle key presses
+                if event.key == K_LEFT or event.key == K_RIGHT or event.key == K_UP or event.key == K_DOWN:
+                    game_state.stillMoving = False
 
-
-                elif event.key == K_ESCAPE:
-                    terminate() # Esc key quits.
+        
+        if not game_state.stillMoving:
+            playerMoveTo = None
 
         if playerMoveTo != None:
             # If the player pushed a key to move, make the move

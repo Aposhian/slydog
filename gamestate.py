@@ -43,6 +43,7 @@ class GameState:
         self.cameraOffsetX = 0
         self.cameraOffsetY = 0
         self.currentImg = "down"
+        self.stillMoving = False
 
         self.distance_to_bbX = 0
         self.distance_to_bbY = 0

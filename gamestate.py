@@ -221,11 +221,11 @@ class GameState:
         self.text_boxes = [output_box, input_box2]
 
         self.characters = [
-            Character("Robby", "assets/robot.png", "assets/robot_sprite.png", "robot.txt"),
-            Character("Alicia", "assets/girl.png", "assets/girl_sprite.png", "girl.txt"),
-            Character("George", "assets/monster.png", "assets/monster_sprite.png", "monster.txt"),
-            Character("Alfred", "assets/nervous.png", "assets/nervous_sprite.png", "nervous.txt"),
-            Character("Mark", "assets/trenchcoat.png", "assets/trenchcoat_sprite.png", "trenchcoat.txt")
+            Character("Robby", "assets/robot.png", "assets/robot_sprite.png", "scripts/characters/robot.txt"),
+            Character("Alicia", "assets/girl.png", "assets/girl_sprite.png", "scripts/characters/girl.txt"),
+            Character("George", "assets/monster.png", "assets/monster_sprite.png", "scripts/characters/monster.txt"),
+            Character("Alfred", "assets/nervous.png", "assets/nervous_sprite.png", "scripts/characters/nervous.txt"),
+            Character("Mark", "assets/trenchcoat.png", "assets/trenchcoat_sprite.png", "scripts/characters/trenchcoat.txt")
         ]
         #self.initCharacters()
 

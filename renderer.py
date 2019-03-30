@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 WINWIDTH = 800 # width of the program's window, in pixels
 WINHEIGHT = 600 # height in pixels
 HALF_WINWIDTH = int(WINWIDTH / 2)
@@ -18,7 +19,6 @@ TILEFLOORHEIGHT = 40
 DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
 
 pygame.display.set_caption('Star Pusher')
-BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
 
 # A global dict value that will contain all the Pygame
 # Surface objects returned by pygame.image.load().
@@ -41,10 +41,93 @@ IMAGESDICT = {'uncovered goal': pygame.image.load('assets/RedSelector.png'),
               'tall tree': pygame.image.load('assets/Tree_Tall.png'),
               'ugly tree': pygame.image.load('assets/Tree_Ugly.png')}
 
+# These dict values are global, and map the character that appears
+# in the level file to the Surface object it represents.
+TILEMAPPING = {'x': IMAGESDICT['corner'],
+               '#': IMAGESDICT['wall'],
+               'o': IMAGESDICT['inside floor'],
+               ' ': IMAGESDICT['outside floor']}
+OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],
+                      '2': IMAGESDICT['short tree'],
+                      '3': IMAGESDICT['tall tree'],
+                      '4': IMAGESDICT['ugly tree']}
 
-def startScreen():
-    """Display the start screen (which has the title and instructions)
-    until the player presses a key. Returns None."""
+PLAYERIMAGES = [IMAGESDICT['princess'],
+                IMAGESDICT['boy'],
+                IMAGESDICT['catgirl'],
+                IMAGESDICT['horngirl'],
+                IMAGESDICT['pinkgirl']]
+
+# The percentage of outdoor tiles that have additional
+# decoration on them, such as a tree or rock.
+OUTSIDE_DECORATION_PCT = 20
+
+BRIGHTBLUE = (  0, 170, 255)
+WHITE      = (255, 255, 255)
+BGCOLOR = BRIGHTBLUE
+TEXTCOLOR = WHITE
+
+# def initialize_render(game_state):
+    # mapWidth = len(game_state.map) * TILEWIDTH
+    # mapHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
+    # MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH
+    # MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
+
+def render(game_state, mapSurf, mapNeedsRedraw):
+    DISPLAYSURF.fill(BGCOLOR)
+
+    if mapNeedsRedraw or mapSurf is None:
+        mapSurf = drawMap(game_state)
+
+    # Adjust mapSurf's Rect object based on the camera offset.
+    mapSurfRect = mapSurf.get_rect()
+    mapSurfRect.center = (HALF_WINWIDTH + game_state.cameraOffsetX,
+                    HALF_WINHEIGHT + game_state.cameraOffsetY)
+
+    # Draw mapSurf to the DISPLAYSURF Surface object.
+    DISPLAYSURF.blit(mapSurf, mapSurfRect)
+    return mapSurf
+
+def drawMap(game_state):
+    """Draws the map to a Surface object, including the player and
+    stars. This function does not call pygame.display.update(), nor
+    does it draw the "Level" and "Steps" text in the corner."""
+
+    # mapSurf will be the single Surface object that the tiles are drawn
+    # on, so that it is easy to position the entire map on the DISPLAYSURF
+    # Surface object. First, the width and height must be calculated.
+    mapSurfWidth = len(game_state.map) * TILEWIDTH
+    mapSurfHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
+    mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight))
+    mapSurf.fill(BGCOLOR) # start with a blank color on the surface.
+
+    # Draw the tile sprites onto this surface.
+    for x in range(len(game_state.map)):
+        for y in range(len(game_state.map[x])):
+            spaceRect = pygame.Rect((x * TILEWIDTH, y * TILEFLOORHEIGHT, TILEWIDTH, TILEHEIGHT))
+            if game_state.map[x][y] in TILEMAPPING:
+                baseTile = TILEMAPPING[game_state.map[x][y]]
+            elif game_state.map[x][y] in OUTSIDEDECOMAPPING:
+                baseTile = TILEMAPPING[' ']
+
+            # First draw the base ground/wall tile.
+            mapSurf.blit(baseTile, spaceRect)
+
+            if game_state.map[x][y] in OUTSIDEDECOMAPPING:
+                # Draw any tree/rock decorations that are on this tile.
+                mapSurf.blit(OUTSIDEDECOMAPPING[game_state.map[x][y]], spaceRect)
+
+            # Last draw the player on the board.
+            if (x, y) == game_state.player_pos:
+                # Note: The value "currentImage" refers
+                # to a key in "PLAYERIMAGES" which has the
+                # specific player image we want to show.
+                mapSurf.blit(PLAYERIMAGES[0], spaceRect)
+
+    return mapSurf
+
+def renderStartScreen():
+    BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
 
     # Position the title image.
     titleRect = IMAGESDICT['title'].get_rect()
@@ -76,16 +159,3 @@ def startScreen():
         instRect.centerx = HALF_WINWIDTH
         topCoord += instRect.height # Adjust for the height of the line.
         DISPLAYSURF.blit(instSurf, instRect)
-
-    while True: # Main loop for the start screen.
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                terminate()
-            elif event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    terminate()
-                return # user has pressed a key, so return.
-
-        # Display the DISPLAYSURF contents to the actual screen.
-        pygame.display.update()
-        FPSCLOCK.tick()

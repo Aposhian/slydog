@@ -6,7 +6,7 @@
 import random, sys, copy, os, pygame
 from pygame.locals import *
 
-FPS = 30 # frames per second to update the screen
+# FPS = 30 # frames per second to update the screen
 WINWIDTH = 800 # width of the program's window, in pixels
 WINHEIGHT = 600 # height in pixels
 HALF_WINWIDTH = int(WINWIDTH / 2)
@@ -62,7 +62,7 @@ def main():
                   'title': pygame.image.load('assets/star_title.png'),
                   'solved': pygame.image.load('assets/star_solved.png'),
                   'princess': pygame.image.load('assets/princess.png'),
-                  'boy': pygame.image.load('assets/boy.png'),
+                  'boy': pygame.image.load('assets/testsprite.png'),
                   'catgirl': pygame.image.load('assets/catgirl.png'),
                   'horngirl': pygame.image.load('assets/horngirl.png'),
                   'pinkgirl': pygame.image.load('assets/pinkgirl.png'),
@@ -219,12 +219,6 @@ def runLevel(levels, levelNum):
                 levelIsComplete = True
                 keyPressed = False
 
-        DISPLAYSURF.fill(BGCOLOR)
-
-        if mapNeedsRedraw:
-            mapSurf = drawMap(mapObj, gameStateObj, levelObj['goals'])
-            mapNeedsRedraw = False
-
         if cameraUp and cameraOffsetY < MAX_CAM_X_PAN:
             cameraOffsetY += CAM_MOVE_SPEED
         elif cameraDown and cameraOffsetY > -MAX_CAM_X_PAN:
@@ -233,6 +227,12 @@ def runLevel(levels, levelNum):
             cameraOffsetX += CAM_MOVE_SPEED
         elif cameraRight and cameraOffsetX > -MAX_CAM_Y_PAN:
             cameraOffsetX -= CAM_MOVE_SPEED
+
+        DISPLAYSURF.fill(BGCOLOR)
+
+        if mapNeedsRedraw:
+            mapSurf = drawMap(mapObj, gameStateObj, levelObj['goals'])
+            mapNeedsRedraw = False
 
         # Adjust mapSurf's Rect object based on the camera offset.
         mapSurfRect = mapSurf.get_rect()
@@ -499,7 +499,7 @@ def readLevelsFile(filename):
                         'mapObj': mapObj,
                         'goals': goals,
                         'startState': gameStateObj}
-
+            print(mapObj)
             levels.append(levelObj)
 
             # Reset the variables for reading the next map.

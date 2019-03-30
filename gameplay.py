@@ -1,14 +1,17 @@
 import sys
 import pygame
 from pygame.locals import *
+import time
 
 from gamestate import GameState
-from renderer import render, renderStartScreen, TILEWIDTH, TILEFLOORHEIGHT
+from renderer import render, renderStartScreen, TILEWIDTH, TILEHEIGHT, TILEFLOORHEIGHT
+from renderer import HALF_WINHEIGHT, HALF_WINWIDTH
 
 UP = 'up'
 DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
+lastImg = "down"
 
 def startScreen(FPSCLOCK):
     """Display the start screen (which has the title and instructions)
@@ -30,9 +33,11 @@ def startScreen(FPSCLOCK):
         FPSCLOCK.tick()
 
 def main(game_state):
+    
     FPSCLOCK = pygame.time.Clock()
 
     pygame.init()
+    pygame.key.set_repeat(1, 130)
 
     startScreen(FPSCLOCK) # show the title screen until the user presses a key
 
@@ -40,10 +45,18 @@ def main(game_state):
 
     mapSurf = None
 
+    # For camera offset logic
+    mapWidth = len(game_state.map) * TILEWIDTH
+    mapHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
+    MAX_CAM_Y_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH
+    MAX_CAM_X_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
+
     # initialize_render(game_state)
+    playerMoveTo = None
 
     while True: # main game loop
         # Reset these variables:
+
         playerMoveTo = None
 
         for event in pygame.event.get(): # event handling loop
@@ -55,33 +68,51 @@ def main(game_state):
                 # Handle key presses
                 if event.key == K_LEFT:
                     playerMoveTo = LEFT
+                    game_state.currentImg = "left"
                 elif event.key == K_RIGHT:
                     playerMoveTo = RIGHT
+                    game_state.currentImg = "right"
                 elif event.key == K_UP:
                     playerMoveTo = UP
+                    game_state.currentImg = "up"
                 elif event.key == K_DOWN:
                     playerMoveTo = DOWN
+                    game_state.currentImg = "down"
+                #elif event.key == K_ESCAPE:
+                #    terminate() # Esc key quits.
 
-                elif event.key == K_ESCAPE:
-                    terminate() # Esc key quits.
 
         if playerMoveTo != None:
             # If the player pushed a key to move, make the move
             # (if possible) and push any stars that are pushable.
             moved = makeMove(game_state, playerMoveTo)
 
+            if game_state.currentImg != lastImg:
+                mapNeedsRedraw = True
             if moved:
+                if playerMoveTo == RIGHT:
+                    game_state.distance_to_bbX += 1
+                elif playerMoveTo == LEFT:
+                    game_state.distance_to_bbX -= 1
+                elif playerMoveTo == UP:
+                    game_state.distance_to_bbY += 1
+                elif playerMoveTo == DOWN:
+                    game_state.distance_to_bbY -= 1
                 mapNeedsRedraw = True
             
-            # TODO: Add bounding box condition (and counters to track it in gamestate)
-            if playerMoveTo == RIGHT:
+            # Update camera if player is out of bounding box if possible
+            if game_state.outOfBBX and playerMoveTo == RIGHT and game_state.cameraOffsetX > -MAX_CAM_X_PAN:
                 game_state.cameraOffsetX -= TILEWIDTH
-            elif playerMoveTo == LEFT:
+                game_state.distance_to_bbX -= 1
+            elif game_state.outOfBBX and playerMoveTo == LEFT and game_state.cameraOffsetX < MAX_CAM_X_PAN:
                 game_state.cameraOffsetX += TILEWIDTH
-            elif playerMoveTo == UP:
+                game_state.distance_to_bbX += 1
+            elif game_state.outOfBBY and playerMoveTo == UP and game_state.cameraOffsetY < MAX_CAM_Y_PAN:
                 game_state.cameraOffsetY += TILEFLOORHEIGHT
-            elif playerMoveTo == DOWN:
+                game_state.distance_to_bbY -= 1
+            elif game_state.outOfBBY and playerMoveTo == DOWN and game_state.cameraOffsetY > -MAX_CAM_Y_PAN:
                 game_state.cameraOffsetY -= TILEFLOORHEIGHT
+                game_state.distance_to_bbY += 1
 
         # Render
         mapSurf = render(game_state, mapSurf, mapNeedsRedraw)
@@ -99,7 +130,7 @@ def isWall(mapObj, x, y):
 
     if x < 0 or x >= len(mapObj) or y < 0 or y >= len(mapObj[x]):
         return False # x and y aren't actually on the map.
-    elif mapObj[x][y] in ('#', 'x'):
+    elif mapObj[x][y] in ('#', 'x', 'L', 'J'):
         return True # wall is blocking
     return False
 

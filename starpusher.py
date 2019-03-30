@@ -499,7 +499,6 @@ def readLevelsFile(filename):
                         'mapObj': mapObj,
                         'goals': goals,
                         'startState': gameStateObj}
-            print(mapObj)
             levels.append(levelObj)
 
             # Reset the variables for reading the next map.

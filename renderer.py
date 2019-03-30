@@ -22,7 +22,7 @@ pygame.display.set_caption('Star Pusher')
 
 # A global dict value that will contain all the Pygame
 # Surface objects returned by pygame.image.load().
-IMAGESDICT = {'uncovered goal': pygame.image.load('assets/RedSelector.png'),
+IMAGESDICT = {'bkgd': pygame.image.load('assets/backexample.jpg').convert(),
               'covered goal': pygame.image.load('assets/Selector.png'),
               'star': pygame.image.load('assets/Star.png'),
               'corner': pygame.image.load('assets/Wall_Block_Tall.png'),
@@ -31,7 +31,10 @@ IMAGESDICT = {'uncovered goal': pygame.image.load('assets/RedSelector.png'),
               'outside floor': pygame.image.load('assets/Grass_Block.png'),
               'title': pygame.image.load('assets/star_title.png'),
               'solved': pygame.image.load('assets/star_solved.png'),
-              'princess': pygame.image.load('assets/testdogsprite.png'),
+              'princess': pygame.image.load('assets/dogspritefront.png'),
+              'princessL': pygame.image.load('assets/dogspriteleft.png'),
+              'princessR': pygame.image.load('assets/dogspriteright.png'),
+              'princessBack': pygame.image.load('assets/dogspriteback.png'),
               'boy': pygame.image.load('assets/boy.png'),
               'catgirl': pygame.image.load('assets/catgirl.png'),
               'horngirl': pygame.image.load('assets/horngirl.png'),
@@ -39,20 +42,27 @@ IMAGESDICT = {'uncovered goal': pygame.image.load('assets/RedSelector.png'),
               'rock': pygame.image.load('assets/Rock.png'),
               'short tree': pygame.image.load('assets/Tree_Short.png'),
               'tall tree': pygame.image.load('assets/Tree_Tall.png'),
-              'ugly tree': pygame.image.load('assets/Tree_Ugly.png')}
+              'ugly tree': pygame.image.load('assets/Tree_Ugly.png'),
+              'chair': pygame.image.load('assets/chair sprite.png'),
+              'chairFlip': pygame.transform.flip(pygame.image.load('assets/chair sprite.png'), True, False)}
 
 # These dict values are global, and map the character that appears
 # in the level file to the Surface object it represents.
 TILEMAPPING = {'x': IMAGESDICT['corner'],
                '#': IMAGESDICT['wall'],
                'o': IMAGESDICT['inside floor'],
-               ' ': IMAGESDICT['outside floor']}
+               ' ': IMAGESDICT['outside floor'],
+               'L': IMAGESDICT['chair'],
+               'J': IMAGESDICT['chairFlip']}
 OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],
                       '2': IMAGESDICT['short tree'],
                       '3': IMAGESDICT['tall tree'],
                       '4': IMAGESDICT['ugly tree']}
 
 PLAYERIMAGES = [IMAGESDICT['princess'],
+                IMAGESDICT['princessL'],
+                IMAGESDICT['princessR'],
+                IMAGESDICT['princessBack'],
                 IMAGESDICT['boy'],
                 IMAGESDICT['catgirl'],
                 IMAGESDICT['horngirl'],
@@ -67,14 +77,15 @@ WHITE      = (255, 255, 255)
 BGCOLOR = BRIGHTBLUE
 TEXTCOLOR = WHITE
 
-# def initialize_render(game_state):
-    # mapWidth = len(game_state.map) * TILEWIDTH
-    # mapHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
-    # MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH
-    # MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
-
 def render(game_state, mapSurf, mapNeedsRedraw):
-    DISPLAYSURF.fill(BGCOLOR)
+
+    # Render scrolling background
+    bkgd_width = IMAGESDICT['bkgd'].get_rect().width
+    rel_x = game_state.background_scroll_x % bkgd_width
+    DISPLAYSURF.blit(IMAGESDICT['bkgd'], (rel_x - bkgd_width, 0))
+    if rel_x < WINWIDTH:
+        DISPLAYSURF.blit(IMAGESDICT['bkgd'], (rel_x, 0))
+    game_state.background_scroll_x -= 4
 
     if mapNeedsRedraw or mapSurf is None:
         mapSurf = drawMap(game_state)
@@ -122,8 +133,14 @@ def drawMap(game_state):
                 # Note: The value "currentImage" refers
                 # to a key in "PLAYERIMAGES" which has the
                 # specific player image we want to show.
-                mapSurf.blit(PLAYERIMAGES[0], spaceRect)
-
+                if game_state.currentImg == "down":
+                    mapSurf.blit(PLAYERIMAGES[0], spaceRect)
+                elif game_state.currentImg == "left":
+                    mapSurf.blit(PLAYERIMAGES[1], spaceRect)
+                elif game_state.currentImg == "right":
+                    mapSurf.blit(PLAYERIMAGES[2], spaceRect)
+                elif game_state.currentImg == "up":
+                    mapSurf.blit(PLAYERIMAGES[3], spaceRect)
     return mapSurf
 
 def renderStartScreen():

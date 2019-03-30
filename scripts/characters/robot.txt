@@ -1,0 +1,16 @@
+key: hello
+    decomp: *
+        reasmb: Greetings small canine
+
+key: what
+    decomp: do you *
+        reasmb: I do.
+    decomp: is your name *
+        reasmb: Robozurg 3400
+
+key: can
+    decomp: can you *
+        reasmb: Of course I can (1)
+        reasmb: That is impossible for my class of robot.
+    decomp: fly *
+        reasmb: That is impossible for my class of robot.

@@ -83,7 +83,7 @@ WHITE      = (255, 255, 255)
 BGCOLOR = (0,0,0)
 TEXTCOLOR = WHITE
 
-def overlay():
+def overlay(game_state, characterIndex):
     #fade in to black
     for i in range(1, 100):
         s=pygame.Surface((WINWIDTH, WINHEIGHT), pygame.SRCALPHA)
@@ -91,6 +91,8 @@ def overlay():
         DISPLAYSURF.blit(s, (0,0))
         pygame.display.update()
         time.sleep(.00001)
+    # Blit character avatar
+    # DISPLAYSURF.blit(IMAGESDICT[game_state.characters[characterIndex].avatar], (0, 0))
 
 def render(game_state, mapSurf, mapNeedsRedraw):
 

@@ -1,0 +1,28 @@
+key: hello
+    decomp: *
+        reasmb: He hi he there!
+        reasmb: Hel-hello
+
+key: what
+    decomp: do you *
+        reasmb: I d-don't know haha. I suppose I (1) ha ha
+    decomp: know *
+        reasmb: I d-d-don't know much. Ha ha Better ask someone else!
+
+key: look
+    decomp: good *
+        reasmb: Thanks! I suppose suppose so. Oh nevermind! I am silly. Sorry.
+
+key: bathroom
+    decomp: long *
+        reasmb: Well maybe he he. Sorry.
+    decomp: *
+        reasmb: I can't say hmm hmm.
+
+key: bugs
+    decomp: *
+        reasmb: Don't ask me too eat a bug!
+
+key: dog
+    decomp: *
+        reasmb: Nice doggy!!

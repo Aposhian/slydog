@@ -98,8 +98,9 @@ def main(game_state):
                 elif event.key == K_DOWN:
                     playerMoveTo = DOWN
                     game_state.currentImg = "down"
-                elif event.key == pygame.K_e and characterIndex is not None:
-                    overlay()
+                elif event.key == pygame.K_e:
+                # elif event.key == pygame.K_e and characterIndex is not None:
+                    overlay(game_state, characterIndex)
                     done = False
                     while not done:
                         for event in pygame.event.get():

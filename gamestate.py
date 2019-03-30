@@ -286,5 +286,5 @@ class GameState:
         suspect = randomIndex()
         self.characters[suspicious].eliza.combined_script += pre.replace('scripts/clues/untrustworthy.txt',{'suspicious':suspicious,'suspect':suspect,'killer':killerIndex})
 
-        for character in characters:
+        for character in self.characters:
             character.load()

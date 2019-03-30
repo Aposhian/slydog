@@ -38,43 +38,42 @@ class Eliza:
     def load(self):
         key = None
         decomp = None
-        #with open(path) as file:
-            for line in combined_script.splitlines():
-                if not line.strip():
-                    continue
-                tag, content = [part.strip() for part in line.split(':')]
-                if tag == 'initial':
-                    self.initials.append(content)
-                elif tag == 'final':
-                    self.finals.append(content)
-                elif tag == 'quit':
-                    self.quits.append(content)
-                elif tag == 'pre':
-                    parts = content.split(' ')
-                    self.pres[parts[0]] = parts[1:]
-                elif tag == 'post':
-                    parts = content.split(' ')
-                    self.posts[parts[0]] = parts[1:]
-                elif tag == 'synon':
-                    parts = content.split(' ')
-                    self.synons[parts[0]] = parts
-                elif tag == 'key':
-                    parts = content.split(' ')
-                    word = parts[0]
-                    weight = int(parts[1]) if len(parts) > 1 else 1
-                    key = Key(word, weight, [])
-                    self.keys[word] = key
-                elif tag == 'decomp':
-                    parts = content.split(' ')
-                    save = False
-                    if parts[0] == '$':
-                        save = True
-                        parts = parts[1:]
-                    decomp = Decomp(parts, save, [])
-                    key.decomps.append(decomp)
-                elif tag == 'reasmb':
-                    parts = content.split(' ')
-                    decomp.reasmbs.append(parts)
+        for line in combined_script.splitlines():
+            if not line.strip():
+                continue
+            tag, content = [part.strip() for part in line.split(':')]
+            if tag == 'initial':
+                self.initials.append(content)
+            elif tag == 'final':
+                self.finals.append(content)
+            elif tag == 'quit':
+                self.quits.append(content)
+            elif tag == 'pre':
+                parts = content.split(' ')
+                self.pres[parts[0]] = parts[1:]
+            elif tag == 'post':
+                parts = content.split(' ')
+                self.posts[parts[0]] = parts[1:]
+            elif tag == 'synon':
+                parts = content.split(' ')
+                self.synons[parts[0]] = parts
+            elif tag == 'key':
+                parts = content.split(' ')
+                word = parts[0]
+                weight = int(parts[1]) if len(parts) > 1 else 1
+                key = Key(word, weight, [])
+                self.keys[word] = key
+            elif tag == 'decomp':
+                parts = content.split(' ')
+                save = False
+                if parts[0] == '$':
+                    save = True
+                    parts = parts[1:]
+                decomp = Decomp(parts, save, [])
+                key.decomps.append(decomp)
+            elif tag == 'reasmb':
+                parts = content.split(' ')
+                decomp.reasmbs.append(parts)
 
     def _match_decomp_r(self, parts, words, results):
         if not parts and not words:

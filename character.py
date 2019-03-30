@@ -18,6 +18,7 @@ class Character:
 
     def initiateDialogue(self, gameState):
         # Put main function of textbox here
+        pass
 
 """
     class OutputBox:

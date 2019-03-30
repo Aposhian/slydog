@@ -52,7 +52,7 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert()
               'ugly tree': pygame.image.load('assets/Tree_Ugly.png'),
               'chair': pygame.image.load('assets/chair sprite.png'),
               'middle_wall': pygame.image.load('assets/newwall.png'),       
-              'chairFlip': pygame.transform.flip(pygame.image.load('assets/nervous_sprite.png'), True, False)}
+              'chairFlip': pygame.transform.flip(pygame.image.load('assets/chair sprite.png'), True, False)}
 
 # These dict values are global, and map the character that appears
 # in the level file to the Surface object it represents.

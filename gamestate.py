@@ -230,7 +230,7 @@ class GameState:
             Character("Alfred", "assets/nervous.png", "assets/nervous_sprite.png", "nervous.txt"),
             Character("Mark", "assets/trenchcoat.png", "assets/trenchcoat_sprite.png", "trenchcoat.txt")
         ]
-        self.initCharacters()
+        #self.initCharacters()
 
     @property
     def outOfBBX(self):

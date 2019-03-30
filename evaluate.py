@@ -166,8 +166,7 @@ def parseFilename(filename, test=False):
     hidden_size = int(hidden)
     return n_layers, hidden_size, reverse
 
-
-def evaluateSingleSample(input_str):
+def prep_net():
     modelFile = './save/model/movie_subtitles/1-1_512/50000_backup_bidir_model.tar'
     corpus = './corpus/movie_subtitles.txt'
 
@@ -195,6 +194,10 @@ def evaluateSingleSample(input_str):
 
     encoder = encoder.to(device)
     decoder = decoder.to(device)
+
+    return beam_size, encoder, decoder, voc
+
+def evaluateSingleSample(input_str, beam_size, encoder, decoder, voc):
 
     try:
         if beam_size == 1:

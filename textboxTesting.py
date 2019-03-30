@@ -51,8 +51,6 @@ class OutputBox:
             #self.scrolling(dialogue, letter_i+1)
             
             t = Timer(0.5, self.scrolling(),args=(self, dialogue, letter_i+1)).start()
-            
-        
 
     def handle_event(self, event):
 
@@ -81,11 +79,6 @@ class OutputBox:
                     bob = True
                     #what to do when they are done talking?
 
-
-
-
-    
-
     def update(self):
         global backspaceStart
         # Resize the box if the text is too long.
@@ -99,8 +92,6 @@ class OutputBox:
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         # Blit the rect.
         pg.draw.rect(screen, self.color, self.rect, 2)
-
-
 
 class InputBox:
 
@@ -157,9 +148,6 @@ class InputBox:
                 backspaceStart += .05
                 self.text = self.text[:-1]
                 self.txt_surface = FONT.render(self.text, True, self.color)
-                
-                
-
 
     def draw(self, screen):
 
@@ -167,7 +155,6 @@ class InputBox:
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         # Blit the rect.
         pg.draw.rect(screen, self.color, self.rect, 2)
-
 
 
 def main():

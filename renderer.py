@@ -1,3 +1,5 @@
+import time
+
 import pygame
 from pygame.locals import *
 
@@ -76,6 +78,15 @@ BRIGHTBLUE = (  0, 170, 255)
 WHITE      = (255, 255, 255)
 BGCOLOR = BRIGHTBLUE
 TEXTCOLOR = WHITE
+
+def overlay():
+    #fade in to black
+    for i in range(1, 100):
+        s=pygame.Surface((WINWIDTH, WINHEIGHT), pygame.SRCALPHA)
+        s.fill((0,0,0,i/20))
+        DISPLAYSURF.blit(s, (0,0))
+        pygame.display.update()
+        time.sleep(.00001)
 
 def render(game_state, mapSurf, mapNeedsRedraw):
 

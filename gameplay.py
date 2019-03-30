@@ -1,11 +1,14 @@
 import sys
 import pygame
+from threading import Timer
+
 from pygame.locals import *
 import time
 
-from gamestate import GameState
+from gamestate import GameState, OutputBox, InputBox
 from renderer import render, renderStartScreen, TILEWIDTH, TILEHEIGHT, TILEFLOORHEIGHT
-from renderer import HALF_WINHEIGHT, HALF_WINWIDTH
+from renderer import HALF_WINHEIGHT, HALF_WINWIDTH, DISPLAYSURF
+from renderer import WINHEIGHT, WINWIDTH, overlay
 
 UP = 'up'
 DOWN = 'down'
@@ -36,7 +39,6 @@ def main(game_state):
     
     FPSCLOCK = pygame.time.Clock()
 
-    pygame.init()
     pygame.key.set_repeat(1, 130)
 
     startScreen(FPSCLOCK) # show the title screen until the user presses a key
@@ -78,8 +80,32 @@ def main(game_state):
                 elif event.key == K_DOWN:
                     playerMoveTo = DOWN
                     game_state.currentImg = "down"
+                elif event.key == pygame.K_e:
+                    overlay()
+                    done = False
+                    while not done:
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
+                            if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.K_ESCAPE:
+                                    done = True
+                                    #hide overlay after done with loop
+
+                            for box in game_state.text_boxes:
+                                box.handle_event(game_state, event)
+
+                        for box in game_state.text_boxes:
+                            box.update()
+
+                        for box in game_state.text_boxes:
+                            box.draw(DISPLAYSURF)
+
+                        pygame.display.flip()
+                        FPSCLOCK.tick()
                 #elif event.key == K_ESCAPE:
                 #    terminate() # Esc key quits.
+
 
         if playerMoveTo != None:
             # If the player pushed a key to move, make the move
@@ -181,5 +207,6 @@ def makeMove(game_state, playerMoveTo):
         return True
 
 if __name__ == '__main__':
+    pygame.init()
     game_state = GameState()
     main(game_state)

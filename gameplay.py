@@ -9,6 +9,7 @@ from gamestate import GameState, OutputBox, InputBox
 from renderer import render, renderStartScreen, TILEWIDTH, TILEHEIGHT, TILEFLOORHEIGHT
 from renderer import HALF_WINHEIGHT, HALF_WINWIDTH, DISPLAYSURF
 from renderer import WINHEIGHT, WINWIDTH, overlay
+from evaluate import prep_net
 
 UP = 'up'
 DOWN = 'down'
@@ -54,6 +55,7 @@ def getCharacterFacing():
     pass
 
 def main(game_state):
+    game_state.beam_size, game_state.encoder, game_state.decoder, game_state.voc = prep_net()
     
     FPSCLOCK = pygame.time.Clock()
 

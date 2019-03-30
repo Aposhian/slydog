@@ -1,0 +1,15 @@
+key: {suspect}
+    decomp: think *
+        reasmb: {suspect} is a shady character. Don't trust him no matter what!
+    decomp: see *
+        reasmb: Hey, {suspect} gives me the creeps. I can't explain why but I would be careful around him.
+    decomp: *
+        reasmb: {suspect} is a shady character. Don't trust him no matter what!
+
+key: strange
+    decomp: see *
+        reasmb: {suspect} is so evil. I just know it.
+    decomp: walk *
+        reasmb: {suspect} is so evil. JUST LOOK AT THOSE BEADY EYES.
+    decomp: *
+        reasmb: {suspect} is a shady character. Don't trust him no matter what!

@@ -1,0 +1,39 @@
+key: long
+    decomp: see *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: notice *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: find *
+        reasmb: Hey, {bathroom} looks really sick.
+
+key: bathroom
+    decomp: see *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: notice *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: *
+        reasmb: Hey, {bathroom} looks really sick.
+
+key: strange
+    decomp: see *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: notice *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: find *
+        reasmb: Hey, {bathroom} looks really sick.
+
+key: {bathroom}
+    decomp: see *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: notice *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: *
+        reasmb: Hey, {bathroom} looks really sick.
+
+key: {unusual}
+    decomp: see *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: notice *
+        reasmb: Hey, {bathroom} looks really sick.
+    decomp: *
+        reasmb: Hey, {bathroom} looks really sick.

@@ -20,27 +20,22 @@ TILEFLOORHEIGHT = 40
 # when pygame.display.update() is called.
 DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
 
-pygame.display.set_caption('Star Pusher')
+pygame.display.set_caption('Sly Dog')
 
 # A global dict value that will contain all the Pygame
 # Surface objects returned by pygame.image.load().
 IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert(),
               'covered goal': pygame.image.load('assets/Selector.png'),
-              'star': pygame.image.load('assets/Star.png'),
               'corner': pygame.image.load('assets/Wall_Block_Tall.png'),
               'wall': pygame.image.load('assets/doorsketch.png'),
               'inside floor': pygame.image.load('assets/Plain_Block.png'),
               'outside floor': pygame.image.load('assets/floor tile.png'),
               'title': pygame.image.load('assets/star_title.png'),
-              'solved': pygame.image.load('assets/star_solved.png'),
               'princess': pygame.image.load('assets/dogspritefront.png'),
               'princessL': pygame.image.load('assets/dogspriteleft.png'),
               'princessR': pygame.image.load('assets/dogspriteright.png'),
               'princessBack': pygame.image.load('assets/dogspriteback.png'),
               'boy': pygame.image.load('assets/boy.png'),
-              'catgirl': pygame.image.load('assets/catgirl.png'),
-              'horngirl': pygame.image.load('assets/horngirl.png'),
-              'pinkgirl': pygame.image.load('assets/pinkgirl.png'),
               'rock': pygame.image.load('assets/Rock.png'),
               'short tree': pygame.image.load('assets/Tree_Short.png'),
               'tall tree': pygame.image.load('assets/Tree_Tall.png'),
@@ -67,10 +62,7 @@ PLAYERIMAGES = [IMAGESDICT['princess'],
                 IMAGESDICT['princessL'],
                 IMAGESDICT['princessR'],
                 IMAGESDICT['princessBack'],
-                IMAGESDICT['boy'],
-                IMAGESDICT['catgirl'],
-                IMAGESDICT['horngirl'],
-                IMAGESDICT['pinkgirl']]
+                IMAGESDICT['boy']]
 
 # The percentage of outdoor tiles that have additional
 # decoration on them, such as a tree or rock.

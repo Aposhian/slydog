@@ -31,7 +31,6 @@ class OutputBox:
         self.active = False
 
     def scrolling(self, args):
-        #myself = args.self
         dialogue = args.dialogue
         letter_i = args.letter_i
 
@@ -40,24 +39,20 @@ class OutputBox:
         # Re-render the text.
         self.txt_surface = self.FONT.render(self.text, True, self.color)
 
-        if len(self.text) < len(dialogue):
-            #time.sleep(.5)
-            #self.scrolling(dialogue, letter_i+1)
-            
-            t = Timer(0.5, self.scrolling(), args=(self, dialogue, letter_i+1)).start()
+        # if len(self.text) < len(dialogue):
+        #     t = Timer(0.5, self.scrolling(), args=(self, dialogue, letter_i+1)).start()
 
-    def handle_event(self, game_state, event):
+    def handle_event(self, game_state, characterIndex, event):
         #load the next dialogue text if available
         if event.type == pygame.KEYDOWN:   
-  
             if event.key == pygame.K_q:
                 self.text = ""
                 # erase the text
                 pygame.draw.rect(DISPLAYSURF, (50,50,50), self.rect)
                 if game_state.currentDialogue <= len(game_state.script):
-                    for letter in game_state.script[game_state.currentDialogue]:
+                    for letter in game_state.response_script[game_state.currentDialogue]:
                         self.text = self.text + letter
-                    
+
                     # Re-render the text.
                     self.txt_surface = self.FONT.render(self.text, True, self.color)
                     #    time.sleep(.1)
@@ -91,7 +86,7 @@ class InputBox:
         self.txt_surface = self.FONT.render(text, True, self.color)
         self.active = False
 
-    def handle_event(self, game_state, event):
+    def handle_event(self, game_state, characterIndex, event):
         global backspacePressed, backspaceStart
         if event.type == pygame.MOUSEBUTTONDOWN:
             # If the user clicked on the input_box rect.
@@ -105,8 +100,9 @@ class InputBox:
         if event.type == pygame.KEYDOWN:
             if self.active:
                 if event.key == pygame.K_RETURN:
-                    print(self.text) #<<<<<<<<<<<<<<<<<<<<<<< here is where a character's eliza responds
-                    #handleAI(self.text)
+                    self.response_script = {}
+                    # here is where a character's eliza responds
+                    self.response_script[1] = game_state.characters[characterIndex].eliza.respond(self.text)
                     self.text = ''
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
@@ -214,7 +210,7 @@ class GameState:
         self.BOUNDING_BOX_RADIUS = 4
         self.background_scroll_x = 0
         self.currentDialogue = 1
-        self.script = {1:"i want to talk to you",2:"its important",3:"i think you are pregnant"}
+        self.response_script = {1:"i want to talk to you",2:"its important",3:"i think you are pregnant"}
 
         output_box = OutputBox(textEdgeBufferW/2, WINHEIGHT - textEdgeBufferH - TEXT_SIZE*3, WINWIDTH - textEdgeBufferW, TEXT_SIZE*2)
         input_box2 = InputBox(textEdgeBufferW/2, WINHEIGHT - textEdgeBufferH - TEXT_SIZE, WINWIDTH - textEdgeBufferW, TEXT_SIZE)

@@ -81,7 +81,6 @@ def main(game_state):
                 #elif event.key == K_ESCAPE:
                 #    terminate() # Esc key quits.
 
-
         if playerMoveTo != None:
             # If the player pushed a key to move, make the move
             # (if possible) and push any stars that are pushable.

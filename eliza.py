@@ -24,6 +24,8 @@ class Decomp:
 
 class Eliza:
     def __init__(self):
+        self.combined_script = ''
+
         self.initials = []
         self.finals = []
         self.quits = []
@@ -33,11 +35,11 @@ class Eliza:
         self.keys = {}
         self.memory = []
 
-    def load(self, path):
+    def load(self):
         key = None
         decomp = None
-        with open(path) as file:
-            for line in file:
+        #with open(path) as file:
+            for line in combined_script.splitlines():
                 if not line.strip():
                     continue
                 tag, content = [part.strip() for part in line.split(':')]

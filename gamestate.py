@@ -209,6 +209,11 @@ class GameState:
         self.cameraOffsetY = 0
         self.currentImg = "down"
 
+        self.beam_size = None
+        self.encoder = None
+        self.decoder = None
+        self.voc = None
+
         self.distance_to_bbX = 0
         self.distance_to_bbY = 0
         self.BOUNDING_BOX_RADIUS = 4

@@ -38,7 +38,7 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert()
               'monster': pygame.image.load('assets/monster_sprite.png'),
               'monster_avatar': pygame.image.load('assets/monster.png'),
               'girl': pygame.image.load('assets/girl_sprite.png'),
-              'girl_avatar': pygame.image.load('assets/girl.png'),
+              'girl_avatar': pygame.image.load('assets/girl_character.png'),
               'nervous': pygame.image.load('assets/nervous_sprite.png'),
               'nervous_avatar': pygame.image.load('assets/nervous.png'),
               'trenchcoat': pygame.image.load('assets/trenchcoat_sprite.png'),
@@ -98,6 +98,7 @@ def overlay(game_state, characterIndex):
         time.sleep(.00001)
     # Blit character avatar
     DISPLAYSURF.blit(IMAGESDICT[game_state.characters[characterIndex].avatar], (0, 0))
+    pygame.display.update()
 
 def render(game_state, mapSurf, mapNeedsRedraw):
 

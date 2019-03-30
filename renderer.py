@@ -31,7 +31,9 @@ IMAGESDICT = {'uncovered goal': pygame.image.load('assets/RedSelector.png'),
               'outside floor': pygame.image.load('assets/Grass_Block.png'),
               'title': pygame.image.load('assets/star_title.png'),
               'solved': pygame.image.load('assets/star_solved.png'),
-              'princess': pygame.image.load('assets/testdogsprite.png'),
+              'princess': pygame.image.load('assets/dogspritefront.png'),
+              'princessL': pygame.image.load('assets/dogspriteleft.png'),
+              'princessR': pygame.image.load('assets/dogspriteright.png'),
               'boy': pygame.image.load('assets/boy.png'),
               'catgirl': pygame.image.load('assets/catgirl.png'),
               'horngirl': pygame.image.load('assets/horngirl.png'),
@@ -39,20 +41,26 @@ IMAGESDICT = {'uncovered goal': pygame.image.load('assets/RedSelector.png'),
               'rock': pygame.image.load('assets/Rock.png'),
               'short tree': pygame.image.load('assets/Tree_Short.png'),
               'tall tree': pygame.image.load('assets/Tree_Tall.png'),
-              'ugly tree': pygame.image.load('assets/Tree_Ugly.png')}
+              'ugly tree': pygame.image.load('assets/Tree_Ugly.png'),
+              'chair': pygame.image.load('assets/chair sprite.png'),
+              'chairFlip': pygame.transform.flip(pygame.image.load('assets/chair sprite.png'), True, False)}
 
 # These dict values are global, and map the character that appears
 # in the level file to the Surface object it represents.
 TILEMAPPING = {'x': IMAGESDICT['corner'],
                '#': IMAGESDICT['wall'],
                'o': IMAGESDICT['inside floor'],
-               ' ': IMAGESDICT['outside floor']}
+               ' ': IMAGESDICT['outside floor'],
+               'L': IMAGESDICT['chair'],
+               'J': IMAGESDICT['chairFlip']}
 OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],
                       '2': IMAGESDICT['short tree'],
                       '3': IMAGESDICT['tall tree'],
                       '4': IMAGESDICT['ugly tree']}
 
 PLAYERIMAGES = [IMAGESDICT['princess'],
+                IMAGESDICT['princessL'],
+                IMAGESDICT['princessR'],
                 IMAGESDICT['boy'],
                 IMAGESDICT['catgirl'],
                 IMAGESDICT['horngirl'],
@@ -116,8 +124,12 @@ def drawMap(game_state):
                 # Note: The value "currentImage" refers
                 # to a key in "PLAYERIMAGES" which has the
                 # specific player image we want to show.
-                mapSurf.blit(PLAYERIMAGES[0], spaceRect)
-
+                if game_state.currentImg == "down":
+                    mapSurf.blit(PLAYERIMAGES[0], spaceRect)
+                elif game_state.currentImg == "left":
+                    mapSurf.blit(PLAYERIMAGES[1], spaceRect)
+                elif game_state.currentImg == "right":
+                    mapSurf.blit(PLAYERIMAGES[2], spaceRect)
     return mapSurf
 
 def renderStartScreen():

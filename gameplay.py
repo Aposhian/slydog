@@ -10,6 +10,7 @@ UP = 'up'
 DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
+lastImg = "down"
 
 def startScreen(FPSCLOCK):
     """Display the start screen (which has the title and instructions)
@@ -63,12 +64,18 @@ def main(game_state):
                 # Handle key presses
                 if event.key == K_LEFT:
                     playerMoveTo = LEFT
+                    game_state.currentImg = "left"
                 elif event.key == K_RIGHT:
                     playerMoveTo = RIGHT
+                    game_state.currentImg = "right"
                 elif event.key == K_UP:
                     playerMoveTo = UP
+                    game_state.currentImg = "up"
                 elif event.key == K_DOWN:
                     playerMoveTo = DOWN
+                    game_state.currentImg = "down"
+                
+
 
                 elif event.key == K_ESCAPE:
                     terminate() # Esc key quits.
@@ -78,6 +85,8 @@ def main(game_state):
             # (if possible) and push any stars that are pushable.
             moved = makeMove(game_state, playerMoveTo)
 
+            if game_state.currentImg != lastImg:
+                mapNeedsRedraw = True
             if moved:
                 mapNeedsRedraw = True
             
@@ -107,7 +116,7 @@ def isWall(mapObj, x, y):
 
     if x < 0 or x >= len(mapObj) or y < 0 or y >= len(mapObj[x]):
         return False # x and y aren't actually on the map.
-    elif mapObj[x][y] in ('#', 'x'):
+    elif mapObj[x][y] in ('#', 'x', 'L', 'J'):
         return True # wall is blocking
     return False
 

@@ -78,9 +78,12 @@ TEXTCOLOR = WHITE
 def render(game_state, mapSurf, mapNeedsRedraw):
 
     # Render scrolling background
-    rel_x = game_state.background_scroll_x % IMAGESDICT['bkgd'].rect().width()
-    DISPLAYSURF.blit(IMAGESDICT['bkgd'], (rel_x, 0))
-    game_state.background_scroll_x -= 0
+    bkgd_width = IMAGESDICT['bkgd'].get_rect().width
+    rel_x = game_state.background_scroll_x % bkgd_width
+    DISPLAYSURF.blit(IMAGESDICT['bkgd'], (rel_x - bkgd_width, 0))
+    if rel_x < WINWIDTH:
+        DISPLAYSURF.blit(IMAGESDICT['bkgd'], (rel_x, 0))
+    game_state.background_scroll_x -= 4
 
     if mapNeedsRedraw or mapSurf is None:
         mapSurf = drawMap(game_state)

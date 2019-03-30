@@ -43,6 +43,9 @@ def startScreen(FPSCLOCK):
         pygame.display.update()
         FPSCLOCK.tick()
 
+def getCharacterFacing():
+    pass
+
 def main(game_state):
     
     FPSCLOCK = pygame.time.Clock()
@@ -70,10 +73,10 @@ def main(game_state):
         playerMoveTo = None
 
         for event in pygame.event.get(): # event handling loop
+            characterIndex = getCharacterFacing()
             if event.type == QUIT:
                 # Player clicked the "X" at the corner of the window.
                 terminate()
-
             elif event.type == KEYDOWN:
                 # Handle key presses
                 if event.key == K_LEFT:
@@ -88,7 +91,7 @@ def main(game_state):
                 elif event.key == K_DOWN:
                     playerMoveTo = DOWN
                     game_state.currentImg = "down"
-                elif event.key == pygame.K_e:
+                elif event.key == pygame.K_e and characterIndex is not None:
                     overlay()
                     done = False
                     while not done:
@@ -101,7 +104,7 @@ def main(game_state):
                                     #hide overlay after done with loop
 
                             for box in game_state.text_boxes:
-                                box.handle_event(game_state, event)
+                                box.handle_event(game_state, characterIndex, event)
 
                         for box in game_state.text_boxes:
                             box.update()

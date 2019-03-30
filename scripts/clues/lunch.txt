@@ -1,0 +1,21 @@
+key: strange
+    decomp: find *
+        reasmb: I have a hunger. It will soon be satisfied.
+    decomp: see *
+        reasmb: Death comes to all strange (1)
+    decomp: *
+        reasmb: *? My food is in my jaws... almost.
+
+key: see
+    decomp: find *
+        reasmb: If I can eat (1), then I certainly will ha ha.
+    decomp: notice *
+        reasmb: I notice everything. You have to be like that when you are a bad guy ha ha.
+    decomp: *
+        reasmb: It will be delicious (grinding teeth).
+
+key: hungry
+    decomp: see *
+        reasmb: I hunger for that end.
+    decomp: *
+        reasmb: I am very hungry. I have a big salty tooth.

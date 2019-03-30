@@ -1,4 +1,5 @@
 key: bags
-    decomp: saw *
+    decomp: see *
         reasmb: {killer} was nice enough to help me with my bags.
-    decomp:
+    decomp: help *
+        reasmb: {killer} was very kind and helped me with my bags.

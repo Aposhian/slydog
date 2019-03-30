@@ -1,0 +1,8 @@
+key: {killer}
+    decomp: see *
+        reasmb: Run along now little doggy.
+    decomp: notice *
+        reasmb: Umm.. I don't know what you are talking about!
+    decomp: *
+        reasmb: Umm, just go away. I can't say anything!
+

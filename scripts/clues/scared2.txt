@@ -1,0 +1,15 @@
+key: {killer}
+    decomp: see *
+        reasmb: I saw {killer} talking to {scared}. {scared} looked very worried.
+    decomp: walk *
+        reasmb: {killer} keeps walking by {scared}. {scared} seems disconcerted about it.
+    decomp: *
+        reasmb: I saw {killer} talking to {scared}. {scared}'s face made me think something was very wrong.
+
+key: {scared}
+    decomp: see *
+        reasmb: I saw {killer} talking to {scared}. {scared} looked very worried.
+    decomp: walk *
+        reasmb: {killer} keeps walking by {scared}. {scared} seems disconcerted about it.
+    decomp: *
+        reasmb: I saw {killer} talking to {scared}. {scared}'s face made me think something was very wrong.

@@ -246,7 +246,7 @@ class GameState:
             characterIndex = int((random.random() * len(availableCharacters)) // 1)
             with open(filename) as leadin_script:
                 content = leadin_script.read()
-                characters[characterIndex].eliza.combined_script.append(content)
+                characters[characterIndex].eliza.combined_script += content
             availableCharacters.remove(characterIndex)
             if len(availableCharacters) == 0:
                 break
@@ -263,30 +263,30 @@ class GameState:
         # bags
         helped = randomIndex()
         helpwitness = randomIndex()
-        characters[helped].eliza.combined_script.append(pre.replace('scripts/clues/bags1.txt',{'helped':helped,'killer':killerIndex}))
-        characters[helpwitness].eliza.combined_script.append(pre.replace('scripts/clues/bags2.txt',{'helped':helped,'helpwitness':helpwitness}))
+        characters[helped].eliza.combined_script += pre.replace('scripts/clues/bags1.txt',{'helped':helped,'killer':killerIndex})
+        characters[helpwitness].eliza.combined_script += pre.replace('scripts/clues/bags2.txt',{'helped':helped,'helpwitness':helpwitness})
 
         # scared
         scared = randomIndex()
         scared_witness = randomIndex()
-        characters[scared].eliza.combined_script.append(pre.replace('scripts/clues/scared1.txt',{'scared':scared,'killer':killerIndex}))
-        characters[scared_witness].eliza.combined_script.append(pre.replace('scripts/clues/scared2.txt',{'scared':scared,'scared_witness':scared_witness}))
+        characters[scared].eliza.combined_script += pre.replace('scripts/clues/scared1.txt',{'scared':scared,'killer':killerIndex})
+        characters[scared_witness].eliza.combined_script += pre.replace('scripts/clues/scared2.txt',{'scared':scared,'scared_witness':scared_witness})
 
         # lunch
         lunch = randomIndex()
-        characters[lunch].eliza.combined_script.append(pre.replace('scripts/clues/lunch.txt',{'lunch':lunch}))
+        characters[lunch].eliza.combined_script += pre.replace('scripts/clues/lunch.txt',{'lunch':lunch})
 
         # bathroom
         bathroom = randomIndex()
         bathroom_witness = randomIndex()
         sick_witness = randomIndex()
-        characters[bathroom_witness].eliza.combined_script.append(pre.replace('scripts/clues/bathroom1.txt',{'bathroom':bathroom,'bathroom_witness':bathroom_witness}))
-        characters[sick_witness].eliza.combined_script.append(pre.replace('scripts/clues/bathroom2.txt',{'bathroom':bathroom,'sick_witness':sick_witness}))
+        characters[bathroom_witness].eliza.combined_script += pre.replace('scripts/clues/bathroom1.txt',{'bathroom':bathroom,'bathroom_witness':bathroom_witness})
+        characters[sick_witness].eliza.combined_script += pre.replace('scripts/clues/bathroom2.txt',{'bathroom':bathroom,'sick_witness':sick_witness})
 
         # untrustworthy
         suspicious = randomIndex()
         suspect = randomIndex()
-        characters[suspicious].eliza.combined_script.append(pre.replace('scripts/clues/untrustworthy.txt',{'suspicious':suspicious,'suspect':suspect}))
+        characters[suspicious].eliza.combined_script += pre.replace('scripts/clues/untrustworthy.txt',{'suspicious':suspicious,'suspect':suspect})
 
         for character in characters:
             character.load()

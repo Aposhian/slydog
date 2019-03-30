@@ -11,10 +11,10 @@ class Character:
         self.leadinfulfilled = False
         with open(scriptfile) as character_script:
             content = character_script.read()
-            eliza.combined_script.append(content)
+            self.eliza.combined_script += content
     
     def load(self):
-        eliza.load()
+        self.eliza.load()
 
     def initiateDialogue(self, gameState):
         # Put main function of textbox here

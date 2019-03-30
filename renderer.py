@@ -35,6 +35,11 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert()
               'princessL': pygame.image.load('assets/dogspriteleft.png'),
               'princessR': pygame.image.load('assets/dogspriteright.png'),
               'princessBack': pygame.image.load('assets/dogspriteback.png'),
+              'monster': pygame.image.load('assets/monster_sprite.png'),
+              'girl': pygame.image.load('assets/girl_sprite.png'),
+              'nervous': pygame.image.load('assets/nervous_sprite.png'),
+              'trenchcoat': pygame.image.load('assets/trenchcoat_sprite.png'),
+              'robot': pygame.image.load('assets/robot_sprite.png'),
               'boy': pygame.image.load('assets/boy.png'),
               'rock': pygame.image.load('assets/Rock.png'),
               'short tree': pygame.image.load('assets/Tree_Short.png'),
@@ -52,6 +57,11 @@ TILEMAPPING = {'x': IMAGESDICT['corner'],
                ' ': IMAGESDICT['outside floor'],
                'L': IMAGESDICT['chair'],
                'W': IMAGESDICT['middle_wall'],
+               'n': IMAGESDICT['nervous'],
+               'g': IMAGESDICT['girl'],
+               'm': IMAGESDICT['monster'],
+               'r': IMAGESDICT['robot'],
+               't': IMAGESDICT['trenchcoat'],
                'J': IMAGESDICT['chairFlip']}
 OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],
                       '2': IMAGESDICT['short tree'],
@@ -117,8 +127,13 @@ def drawMap(game_state):
     mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight + 100), pygame.SRCALPHA, 32)
 
     # Draw the tile sprites onto this surface.
+    character_codes = {'m':2,'n':3,'r':0,'t':4,'g':1}
     for x in range(len(game_state.map)):
         for y in range(len(game_state.map[x])):
+            map_entry = game_state.map[x][y]
+            if map_entry in character_codes.keys():
+                game_state.characters[character_codes[map_entry]].coordinates = (x,y)
+
             spaceRect = pygame.Rect((x * TILEWIDTH, y * TILEFLOORHEIGHT, TILEWIDTH, TILEHEIGHT))
             if game_state.map[x][y] in TILEMAPPING:
                 baseTile = TILEMAPPING[game_state.map[x][y]]
@@ -126,7 +141,7 @@ def drawMap(game_state):
                 baseTile = TILEMAPPING[' ']
 
             if baseTile.get_size()[1] > TILEHEIGHT:
-                spaceRect.y -= baseTile.get_size()[1] - TILEHEIGHT
+                spaceRect.y -= baseTile.get_size()[1] - TILEHEIGHT -1
             # First draw the base ground/wall tile.
             mapSurf.blit(baseTile, spaceRect)
 

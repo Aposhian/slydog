@@ -153,7 +153,20 @@ class GameState:
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+            ['#', 'L', 'n', ' ', ' ', 'L', 'L', '#'],
+            ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
+            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
+            ['W', 'W', 'W', ' ', ' ', 'W', 'W', 'W'],
+            ['#', 'J', 'J', ' ', ' ', 'g', 'J', '#'],
+            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
+            ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
+            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+            ['#', 'L', 'm', ' ', ' ', 'L', 'L', '#'],
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
@@ -162,7 +175,7 @@ class GameState:
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
+            ['#', 'L', 'L', ' ', ' ', 'n', 'L', '#'],
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
@@ -170,7 +183,7 @@ class GameState:
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
+            ['#', 'L', 't', ' ', ' ', 'L', 'L', '#'],
             ['W', 'W', 'W', ' ', ' ', 'W', 'W', 'W'],
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
@@ -179,20 +192,7 @@ class GameState:
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
-            ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
-            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
-            ['W', 'W', 'W', ' ', ' ', 'W', 'W', 'W'],
-            ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
-            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
-            ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
-            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
+            ['#', 'r', 'L', ' ', ' ', 'L', 'L', '#'],
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
@@ -237,21 +237,23 @@ class GameState:
         # Randomly assign leadins and clues
 
         # leadins
-        availableCharacters = list(range(len(characters)))
+        availableCharacters = list(range(len(self.characters)))
         for filename in Path("scripts/leadins").glob("**/*.txt"):
             characterIndex = int((random.random() * len(availableCharacters)) // 1)
+            print(characterIndex)
             with open(filename) as leadin_script:
                 content = leadin_script.read()
-                characters[characterIndex].eliza.combined_script += content
-            availableCharacters.remove(characterIndex)
+                self.characters[characterIndex].eliza.combined_script += content
             if len(availableCharacters) == 0:
                 break
+            if characterIndex in availableCharacters:
+                availableCharacters.remove(characterIndex)
         
         # clues
         def randomIndex():
-            return int((random.random() * len(characters)) // 1)
+            return int((random.random() * len(self.characters)) // 1)
 
-        pre = Preprocessor(characters)
+        pre = Preprocessor(self.characters)
 
         # Assign killer
         killerIndex = randomIndex()
@@ -259,30 +261,30 @@ class GameState:
         # bags
         helped = randomIndex()
         helpwitness = randomIndex()
-        characters[helped].eliza.combined_script += pre.replace('scripts/clues/bags1.txt',{'helped':helped,'killer':killerIndex})
-        characters[helpwitness].eliza.combined_script += pre.replace('scripts/clues/bags2.txt',{'helped':helped,'helpwitness':helpwitness})
+        self.characters[helped].eliza.combined_script += pre.replace('scripts/clues/bags1.txt',{'helped':helped,'killer':killerIndex})
+        self.characters[helpwitness].eliza.combined_script += pre.replace('scripts/clues/bags2.txt',{'helped':helped,'helpwitness':helpwitness,'killer':killerIndex})
 
         # scared
         scared = randomIndex()
         scared_witness = randomIndex()
-        characters[scared].eliza.combined_script += pre.replace('scripts/clues/scared1.txt',{'scared':scared,'killer':killerIndex})
-        characters[scared_witness].eliza.combined_script += pre.replace('scripts/clues/scared2.txt',{'scared':scared,'scared_witness':scared_witness})
+        self.characters[scared].eliza.combined_script += pre.replace('scripts/clues/scared1.txt',{'scared':scared,'killer':killerIndex})
+        self.characters[scared_witness].eliza.combined_script += pre.replace('scripts/clues/scared2.txt',{'scared':scared,'scared_witness':scared_witness,'killer':killerIndex})
 
         # lunch
         lunch = randomIndex()
-        characters[lunch].eliza.combined_script += pre.replace('scripts/clues/lunch.txt',{'lunch':lunch})
+        self.characters[lunch].eliza.combined_script += pre.replace('scripts/clues/lunch.txt',{'lunch':lunch,'killer':killerIndex})
 
         # bathroom
         bathroom = randomIndex()
         bathroom_witness = randomIndex()
         sick_witness = randomIndex()
-        characters[bathroom_witness].eliza.combined_script += pre.replace('scripts/clues/bathroom1.txt',{'bathroom':bathroom,'bathroom_witness':bathroom_witness})
-        characters[sick_witness].eliza.combined_script += pre.replace('scripts/clues/bathroom2.txt',{'bathroom':bathroom,'sick_witness':sick_witness})
+        self.characters[bathroom_witness].eliza.combined_script += pre.replace('scripts/clues/bathroom1.txt',{'bathroom':bathroom,'bathroom_witness':bathroom_witness,'killer':killerIndex})
+        self.characters[sick_witness].eliza.combined_script += pre.replace('scripts/clues/bathroom2.txt',{'bathroom':bathroom,'sick_witness':sick_witness,'killer':killerIndex})
 
         # untrustworthy
         suspicious = randomIndex()
         suspect = randomIndex()
-        characters[suspicious].eliza.combined_script += pre.replace('scripts/clues/untrustworthy.txt',{'suspicious':suspicious,'suspect':suspect})
+        self.characters[suspicious].eliza.combined_script += pre.replace('scripts/clues/untrustworthy.txt',{'suspicious':suspicious,'suspect':suspect,'killer':killerIndex})
 
         for character in characters:
             character.load()

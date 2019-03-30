@@ -160,7 +160,7 @@ class GameState:
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
             ['W', 'W', 'W', ' ', ' ', 'W', 'W', 'W'],
-            ['#', 'J', 'J', ' ', ' ', 'g', 'J', '#'],
+            ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
@@ -180,7 +180,7 @@ class GameState:
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-            ['#', 'L', 'L', ' ', ' ', 'L', 'L', '#'],
+            ['#', 'g', 'L', ' ', ' ', 'L', 'L', '#'],
             ['#', 'J', 'J', ' ', ' ', 'J', 'J', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
             ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
@@ -223,11 +223,11 @@ class GameState:
         self.text_boxes = [output_box, input_box2]
 
         self.characters = [
-            Character("Robby", "assets/robot.png", "assets/robot_sprite.png", "scripts/characters/robot.txt"),
-            Character("Alicia", "assets/girl.png", "assets/girl_sprite.png", "scripts/characters/girl.txt"),
-            Character("George", "assets/monster.png", "assets/monster_sprite.png", "scripts/characters/monster.txt"),
-            Character("Alfred", "assets/nervous.png", "assets/nervous_sprite.png", "scripts/characters/nervous.txt"),
-            Character("Mark", "assets/trenchcoat.png", "assets/trenchcoat_sprite.png", "scripts/characters/trenchcoat.txt")
+            Character("Robby", "robot_avatar", "assets/robot_sprite.png", "scripts/characters/robot.txt"),
+            Character("Alicia", "girl_avatar", "assets/girl_sprite.png", "scripts/characters/girl.txt"),
+            Character("George", "monster_avatar", "assets/monster_sprite.png", "scripts/characters/monster.txt"),
+            Character("Alfred", "nervous_avatar", "assets/nervous_sprite.png", "scripts/characters/nervous.txt"),
+            Character("Mark", "trenchcoat_avatar", "assets/trenchcoat_sprite.png", "scripts/characters/trenchcoat.txt")
         ]
         #self.initCharacters()
 

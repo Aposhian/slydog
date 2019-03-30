@@ -5,6 +5,8 @@ quit: bye
 quit: goodbye
 quit: see ya
 quit: see you later
+quit: exit
+quit: quit
 
 pre: dont don't
 pre: cant can't
@@ -24,47 +26,109 @@ pre: where's where is
 pre: why's why is
 pre: when's when is
 pre: how's how is
+pre: able can
+pre: wanna want to
+pre: gonna will
+pre: going go
+pre: 
+
+post: you I
+post: I you
 
 synon: drink coke water pepsi soda pop juice milk
-synon: food hamburger pizza pasta spagetti sandwich rice bread fried
+synon: food hamburger pizza pasta spagetti sandwich rice bread fried taco cereal toast
 synon: bomb explosives explosive
+synon: info information clue intel secret
 
 key: how
+    decomp: how are you
+        reasmb: I'm doing fine.
     decomp: how did * get *
         reasmb: (1) just showed up (2).
+    decomp: how long *
+        reasmb: not very long.
 
 key: where
+    decomp: * @food *
+        reasmb: Didn't you bring any food with you?
+    decomp: * @bomb *
+        reasmb: I don't know where the bomb is!
     decomp: *
         reasmb: On the train, of course.
 
 key: what
-    decomp: *
-        reasmb:
     decomp: * your name *
         reasmb: My name is Joe.
+    decomp: what do you want
+        reasmb: I want to steal.
+    decomp: *
+        reasmb: Nothing
 
 key: when
     decomp: *
         reasmb: I can't remember. It was so long ago.
 
 key: why
+    decomp: why are you *
+        reasmb: I just want to be (1)
+        reasmb: I just want to (1)
     decomp: *
         reasmb: Why not?
 
 key: who
+    decomp: who are you
+        reasmb: I'm just a normal guy.
     decomp: * @bomb *
         reasmb: I don't know. Does someone have a bomb?!
     decomp: * your @food *
         reasmb: I don't know, but I suspect my coworker...
+    decomp: who is *
+        reasmb: I don't know who (1) is.
+
+key: want
+    decomp: do you want @food *
+        reasmb: Of course I want (1)!
+    decomp: do you want to go *
+        reasmb: I don't want to go (1).
+    decomp: I want to *
+        reasmb: Why don't you (1) yourself?
+    decomp: I want *
+        reasmb: I can't get (1) for you.
+
+key: can
+    decomp: * tell me * @info *
+        reasmb: I can tell you (2) if you do me a favor.
+    decomp: * you go to *
+        reasmb: I'm not going anywhere.
+
+key: will
+    decomp: * please *
+        reasmb: goto can
+
+key: think
+    decomp: * do you think *
+        reasmb: I think that (2)
+
+key: tell
+key: like
+    decomp: do you like @food *
+        reasmb: Are you going to give me some (1)?
+    decomp: you like me
+        reasmb: Um, I don't know you very well.
+    decomp: @bomb
+        reasmb: I do like fire...
 
 key: xdontcare
     decomp: *
-        reasmb: I couldn't care less.
+        reasmb: I couldn't care less
         reasmb: Why are you telling me?
-        reasmb: Hmm.
+        reasmb: Hmm
 
 key: xnone
     decomp: *
         reasmb: I don't understand.
         reasmb: Sorry, I didn't catch that.
         reasmb: What are you saying?
+        reasmb: I don't know.
+        reasmb: What? {3}
+        reasmb: Whatever.

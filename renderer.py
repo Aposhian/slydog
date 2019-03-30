@@ -86,7 +86,7 @@ OUTSIDE_DECORATION_PCT = 20
 BRIGHTBLUE = (  0, 170, 255)
 WHITE      = (255, 255, 255)
 BGCOLOR = (0,0,0)
-TEXTCOLOR = WHITE
+TEXTCOLOR = (200,200,200)
 
 def overlay(game_state, characterIndex):
     #fade in to black
@@ -177,7 +177,7 @@ def renderStartScreen():
 
     # Position the title image.
     titleRect = IMAGESDICT['title'].get_rect()
-    topCoord = 50 # topCoord tracks where to position the top of the text
+    topCoord = 200 # topCoord tracks where to position the top of the text
     titleRect.top = topCoord
     titleRect.centerx = HALF_WINWIDTH
     topCoord += titleRect.height
@@ -185,16 +185,17 @@ def renderStartScreen():
     # Unfortunately, Pygame's font & text system only shows one line at
     # a time, so we can't use strings with \n newline characters in them.
     # So we will use a list with each line in it.
-    instructionText = ['Push the stars over the marks.',
-                       'Arrow keys to move, WASD for camera control, P to change character.',
-                       'Backspace to reset level, Esc to quit.',
-                       'N for next level, B to go back a level.']
+    instructionText = ['You are a crime solving dog, whose mission is to solve a crime ',
+                       'on the train you are riding.',
+                       'Arrow keys or WASD to move, E to talk with people through chatbox.']
 
     # Start with drawing a blank color to the entire window:
-    DISPLAYSURF.fill(BGCOLOR)
+    #DISPLAYSURF.fill(BGCOLOR)
 
     # Draw the title image to the window:
-    DISPLAYSURF.blit(IMAGESDICT['title'], titleRect)
+
+    DISPLAYSURF.blit(pygame.image.load('assets/Sly Dog Title Screen.png'), (0,0))
+    #DISPLAYSURF.blit(IMAGESDICT['title'], titleRect)
 
     # Position and draw the text.
     for i in range(len(instructionText)):

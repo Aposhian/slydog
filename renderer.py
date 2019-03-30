@@ -67,12 +67,6 @@ WHITE      = (255, 255, 255)
 BGCOLOR = BRIGHTBLUE
 TEXTCOLOR = WHITE
 
-# def initialize_render(game_state):
-    # mapWidth = len(game_state.map) * TILEWIDTH
-    # mapHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
-    # MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH
-    # MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
-
 def render(game_state, mapSurf, mapNeedsRedraw):
     DISPLAYSURF.fill(BGCOLOR)
 

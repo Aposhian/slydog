@@ -3,7 +3,8 @@ import pygame
 from pygame.locals import *
 
 from gamestate import GameState
-from renderer import render, renderStartScreen, TILEWIDTH, TILEFLOORHEIGHT
+from renderer import render, renderStartScreen, TILEWIDTH, TILEHEIGHT, TILEFLOORHEIGHT
+from renderer import HALF_WINHEIGHT, HALF_WINWIDTH
 
 UP = 'up'
 DOWN = 'down'
@@ -30,6 +31,7 @@ def startScreen(FPSCLOCK):
         FPSCLOCK.tick()
 
 def main(game_state):
+    
     FPSCLOCK = pygame.time.Clock()
 
     pygame.init()
@@ -39,6 +41,12 @@ def main(game_state):
     mapNeedsRedraw = True
 
     mapSurf = None
+
+    # For camera offset logic
+    mapWidth = len(game_state.map) * TILEWIDTH
+    mapHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
+    MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH
+    MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
 
     # initialize_render(game_state)
 
@@ -74,13 +82,13 @@ def main(game_state):
                 mapNeedsRedraw = True
             
             # TODO: Add bounding box condition (and counters to track it in gamestate)
-            if playerMoveTo == RIGHT:
+            if playerMoveTo == RIGHT and game_state.cameraOffsetX > -MAX_CAM_Y_PAN:
                 game_state.cameraOffsetX -= TILEWIDTH
-            elif playerMoveTo == LEFT:
+            elif playerMoveTo == LEFT and game_state.cameraOffsetX < MAX_CAM_Y_PAN:
                 game_state.cameraOffsetX += TILEWIDTH
-            elif playerMoveTo == UP:
+            elif playerMoveTo == UP and game_state.cameraOffsetY < MAX_CAM_X_PAN:
                 game_state.cameraOffsetY += TILEFLOORHEIGHT
-            elif playerMoveTo == DOWN:
+            elif playerMoveTo == DOWN and game_state.cameraOffsetY > -MAX_CAM_X_PAN:
                 game_state.cameraOffsetY -= TILEFLOORHEIGHT
 
         # Render

@@ -1,0 +1,7 @@
+key: what
+    decomp: what do you
+        reasmb: Ok
+    decomp: about
+        reasmb: Well let me think.
+    decomp: did you see
+        reasmb: Good question. I am trying to remember.

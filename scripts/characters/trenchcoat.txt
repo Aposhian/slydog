@@ -1,0 +1,17 @@
+key: hello
+    decomp: *
+        reasmb: Hi?
+
+key: what
+    decomp: do you * about *
+        reasmb: I don't like questions kid. Let's just say I (1) a lot about (2)
+    decomp: think *
+        reasmb: My thoughts are not yours little doggy
+
+key: look
+    decomp: good *
+        reasmb: I do look pretty great
+
+key: dog
+    decomp: *
+        reasmb: You are a sly dog. I like that.

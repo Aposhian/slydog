@@ -1,0 +1,27 @@
+key: hello
+    decomp: *
+        reasmb: Hi?
+
+key: what
+    decomp: do you *
+        reasmb: I don't. I think. Just go away doggy.
+    decomp: know *
+        reasmb: Mind your own business!
+
+key: look
+    decomp: good *
+        reasmb: You a strange doggy. Please leave me alone.
+
+key: bathroom
+    decomp: long *
+        reasmb: This is embarrassing. Just mind your own business.
+    decomp: *
+        reasmb: Where you raised in a barn? Just.. Forgive me but I don't talk to strangers.
+
+key: unusual
+    decomp: *
+        reasmb: The most unusual thing around here is you.
+
+key: dog
+    decomp: *
+        reasmb: I see you are a Were Dog. Ok then.

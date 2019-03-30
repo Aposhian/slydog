@@ -1,0 +1,11 @@
+key: you
+    decomp: look nice
+        reasmb: Thank you!
+    decomp: are awesome
+        reasmb: thanks
+    decomp: look great
+        reasmb: Thank you!
+    decomp: look good
+        reasmb: Thank you!
+    decomp: amazing
+        reasmb: That is nice.

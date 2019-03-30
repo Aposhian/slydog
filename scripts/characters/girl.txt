@@ -1,0 +1,35 @@
+key: hello
+    decomp: *
+        reasmb: I miss my doll.
+
+key: parent
+    decomp: where *
+        reasmb: My parents are keeping an eye on me. They need to.
+    decomp: see *
+        reasmb: My parents can't see me.
+        reasmb: I see lots of stars but mom says they are not real.
+
+key: parent
+    decomp: where *
+        reasmb: My parents are keeping an eye on me. They need to.
+    decomp: see *
+        reasmb: My parents can't see me.
+
+key: train
+    decomp: girl *
+        reasmb: Trains are for boys.
+    decomp: *
+        reasmb: This is a space train.
+        reasmb: THIS TRAIN IS HUGE.
+
+key: tell me *
+    decomp: *
+        reasmb: I don't talk to strangers! GO AWAY!
+
+key: think about *
+    decomp: *
+        reasmb: I don't even know about that!
+
+key: think *
+    decomp: *
+        reasmb: I don't know!

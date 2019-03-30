@@ -1,0 +1,7 @@
+key: I
+    decomp: am a * 
+        reasmb: You seem like a good (1)
+    decomp: like
+        reasmb: Interesting
+    decomp: think
+        reasmb: Thanks for sharing. I love talking with interesting people.

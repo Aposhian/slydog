@@ -1,6 +1,7 @@
 import sys
 import pygame
 from pygame.locals import *
+import time
 
 from gamestate import GameState
 from renderer import render, renderStartScreen, TILEWIDTH, TILEHEIGHT, TILEFLOORHEIGHT
@@ -51,9 +52,11 @@ def main(game_state):
     MAX_CAM_X_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
 
     # initialize_render(game_state)
+    playerMoveTo = None
 
     while True: # main game loop
         # Reset these variables:
+
         playerMoveTo = None
 
         for event in pygame.event.get(): # event handling loop
@@ -75,11 +78,9 @@ def main(game_state):
                 elif event.key == K_DOWN:
                     playerMoveTo = DOWN
                     game_state.currentImg = "down"
-                
+                #elif event.key == K_ESCAPE:
+                #    terminate() # Esc key quits.
 
-
-                elif event.key == K_ESCAPE:
-                    terminate() # Esc key quits.
 
         if playerMoveTo != None:
             # If the player pushed a key to move, make the move

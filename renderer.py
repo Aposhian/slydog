@@ -34,6 +34,7 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/backexample.jpg').convert(),
               'princess': pygame.image.load('assets/dogspritefront.png'),
               'princessL': pygame.image.load('assets/dogspriteleft.png'),
               'princessR': pygame.image.load('assets/dogspriteright.png'),
+              'princessBack': pygame.image.load('assets/dogspriteback.png'),
               'boy': pygame.image.load('assets/boy.png'),
               'catgirl': pygame.image.load('assets/catgirl.png'),
               'horngirl': pygame.image.load('assets/horngirl.png'),
@@ -61,6 +62,7 @@ OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],
 PLAYERIMAGES = [IMAGESDICT['princess'],
                 IMAGESDICT['princessL'],
                 IMAGESDICT['princessR'],
+                IMAGESDICT['princessBack'],
                 IMAGESDICT['boy'],
                 IMAGESDICT['catgirl'],
                 IMAGESDICT['horngirl'],
@@ -137,6 +139,8 @@ def drawMap(game_state):
                     mapSurf.blit(PLAYERIMAGES[1], spaceRect)
                 elif game_state.currentImg == "right":
                     mapSurf.blit(PLAYERIMAGES[2], spaceRect)
+                elif game_state.currentImg == "up":
+                    mapSurf.blit(PLAYERIMAGES[3], spaceRect)
     return mapSurf
 
 def renderStartScreen():

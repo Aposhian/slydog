@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 from character import Character
 from pathlib import Path
 import random
 from preprocessor import Preprocessor
-=======
 import sys
 import time
 from threading import Timer
@@ -146,7 +144,6 @@ class InputBox:
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
->>>>>>> 60f79234ec6a00e090fbb00e7d86534bfc618a49
 
 class GameState:
 

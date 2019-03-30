@@ -27,7 +27,7 @@ pygame.display.set_caption('Sly Dog')
 IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert(),
               'covered goal': pygame.image.load('assets/Selector.png'),
               'corner': pygame.image.load('assets/Wall_Block_Tall.png'),
-              'wall': pygame.image.load('assets/wallspriteleft.png'),
+              'wall': pygame.image.load('assets/doorsketch.png'),
               'inside floor': pygame.image.load('assets/Plain_Block.png'),
               'outside floor': pygame.image.load('assets/floor tile.png'),
               'title': pygame.image.load('assets/star_title.png'),
@@ -40,7 +40,7 @@ IMAGESDICT = {'bkgd': pygame.image.load('assets/stars background.png').convert()
               'short tree': pygame.image.load('assets/Tree_Short.png'),
               'tall tree': pygame.image.load('assets/Tree_Tall.png'),
               'ugly tree': pygame.image.load('assets/Tree_Ugly.png'),
-              'chair': pygame.image.load('assets/nervous_sprite.png'),
+              'chair': pygame.image.load('assets/chair sprite.png'),
               'middle_wall': pygame.image.load('assets/Wood_Block_Tall.png'),       
               'chairFlip': pygame.transform.flip(pygame.image.load('assets/nervous_sprite.png'), True, False)}
 

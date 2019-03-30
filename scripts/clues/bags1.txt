@@ -1,0 +1,4 @@
+key: bags
+    decomp: saw *
+        reasmb: {killer} was nice enough to help me with my bags.
+    decomp:

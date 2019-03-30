@@ -17,7 +17,7 @@ class Preprocessor:
             s = None
             while True:
                 scopy = s
-                s = re.sub('\{.+\}', getMatch, content)
+                s = re.sub('\{[a-z]+\}', getMatch, content)
                 if s == scopy:
                     break
             id_to_index = {}

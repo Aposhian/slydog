@@ -45,8 +45,8 @@ def main(game_state):
     # For camera offset logic
     mapWidth = len(game_state.map) * TILEWIDTH
     mapHeight = (len(game_state.map[0]) - 1) * TILEFLOORHEIGHT + TILEHEIGHT
-    MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH
-    MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
+    MAX_CAM_Y_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH
+    MAX_CAM_X_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT
 
     # initialize_render(game_state)
 
@@ -79,17 +79,29 @@ def main(game_state):
             moved = makeMove(game_state, playerMoveTo)
 
             if moved:
+                if playerMoveTo == RIGHT:
+                    game_state.distance_to_bbX += 1
+                elif playerMoveTo == LEFT:
+                    game_state.distance_to_bbX -= 1
+                elif playerMoveTo == UP:
+                    game_state.distance_to_bbY += 1
+                elif playerMoveTo == DOWN:
+                    game_state.distance_to_bbY -= 1
                 mapNeedsRedraw = True
             
-            # TODO: Add bounding box condition (and counters to track it in gamestate)
-            if playerMoveTo == RIGHT and game_state.cameraOffsetX > -MAX_CAM_Y_PAN:
+            # Update camera if player is out of bounding box if possible
+            if game_state.outOfBBX and playerMoveTo == RIGHT and game_state.cameraOffsetX > -MAX_CAM_X_PAN:
                 game_state.cameraOffsetX -= TILEWIDTH
-            elif playerMoveTo == LEFT and game_state.cameraOffsetX < MAX_CAM_Y_PAN:
+                game_state.distance_to_bbX -= 1
+            elif game_state.outOfBBX and playerMoveTo == LEFT and game_state.cameraOffsetX < MAX_CAM_X_PAN:
                 game_state.cameraOffsetX += TILEWIDTH
-            elif playerMoveTo == UP and game_state.cameraOffsetY < MAX_CAM_X_PAN:
+                game_state.distance_to_bbX += 1
+            elif game_state.outOfBBY and playerMoveTo == UP and game_state.cameraOffsetY < MAX_CAM_Y_PAN:
                 game_state.cameraOffsetY += TILEFLOORHEIGHT
-            elif playerMoveTo == DOWN and game_state.cameraOffsetY > -MAX_CAM_X_PAN:
+                game_state.distance_to_bbY -= 1
+            elif game_state.outOfBBY and playerMoveTo == DOWN and game_state.cameraOffsetY > -MAX_CAM_Y_PAN:
                 game_state.cameraOffsetY -= TILEFLOORHEIGHT
+                game_state.distance_to_bbY += 1
 
         # Render
         mapSurf = render(game_state, mapSurf, mapNeedsRedraw)

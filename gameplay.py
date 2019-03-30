@@ -37,6 +37,7 @@ def main(game_state):
     FPSCLOCK = pygame.time.Clock()
 
     pygame.init()
+    pygame.key.set_repeat(1, 130)
 
     startScreen(FPSCLOCK) # show the title screen until the user presses a key
 

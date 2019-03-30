@@ -25,3 +25,8 @@ key: unusual
 key: dog
     decomp: *
         reasmb: I see you are a Were Dog. Ok then.
+
+key: xnone
+    decomp: *
+        reasmb: RUN_NEURAL_NETWORK
+        

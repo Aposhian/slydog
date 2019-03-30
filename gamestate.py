@@ -11,6 +11,7 @@ from pygame.locals import *
 
 from renderer import DISPLAYSURF
 from renderer import WINHEIGHT, WINWIDTH
+from evaluate import evaluateSingleSample
 
 # For textboxes
 COLOR_INACTIVE = pygame.Color('lightskyblue3')
@@ -104,6 +105,8 @@ class InputBox:
                     self.response_script = {}
                     # here is where a character's eliza responds
                     self.response_script[1] = game_state.characters[characterIndex].eliza.respond(self.text)
+                    if self.response_script[1] == "RUN_NEURAL_NETWORK":
+                        evaluateSingleSample('hi there', game_state.beam_size, game_state.encoder, game_state.decoder, game_state.voc)
                     self.text = ''
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
@@ -224,7 +227,7 @@ class GameState:
             Character("Alfred", "nervous_avatar", "assets/nervous_sprite.png", "scripts/characters/nervous.txt"),
             Character("Mark", "trenchcoat_avatar", "assets/trenchcoat_sprite.png", "scripts/characters/trenchcoat.txt")
         ]
-        #self.initCharacters()
+        self.initCharacters()
 
     @property
     def outOfBBX(self):

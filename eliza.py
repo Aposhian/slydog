@@ -38,7 +38,9 @@ class Eliza:
     def load(self):
         key = None
         decomp = None
-        for line in combined_script.splitlines():
+        print(self.combined_script)
+        for line in self.combined_script.splitlines():
+            print(line)
             if not line.strip():
                 continue
             tag, content = [part.strip() for part in line.split(':')]

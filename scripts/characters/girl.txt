@@ -22,14 +22,18 @@ key: train
         reasmb: This is a space train.
         reasmb: THIS TRAIN IS HUGE.
 
-key: tell me *
-    decomp: *
+key: tell 
+    decomp: me *
         reasmb: I don't talk to strangers! GO AWAY!
 
-key: think about *
-    decomp: *
+key: think
+    decomp: about *
         reasmb: I don't even know about that!
 
-key: think *
+key: think
     decomp: *
         reasmb: I don't know!
+
+key: xnone
+    decomp: *
+        reasmb: RUN_NEURAL_NETWORK

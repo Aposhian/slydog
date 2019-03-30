@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 
 from gamestate import GameState
-from renderer import render, renderStartScreen
+from renderer import render, renderStartScreen, TILEWIDTH, TILEFLOORHEIGHT
 
 UP = 'up'
 DOWN = 'down'
@@ -74,10 +74,14 @@ def main(game_state):
                 mapNeedsRedraw = True
             
             # TODO: Add bounding box condition (and counters to track it in gamestate)
-            # if playerMoveTo == RIGHT:
-            # elif layerMoveTo == LEFT:
-            # elif layerMoveTo == UP:
-            # elif layerMoveTo == DOWN:
+            if playerMoveTo == RIGHT:
+                game_state.cameraOffsetX -= TILEWIDTH
+            elif playerMoveTo == LEFT:
+                game_state.cameraOffsetX += TILEWIDTH
+            elif playerMoveTo == UP:
+                game_state.cameraOffsetY += TILEFLOORHEIGHT
+            elif playerMoveTo == DOWN:
+                game_state.cameraOffsetY -= TILEFLOORHEIGHT
 
         # Render
         mapSurf = render(game_state, mapSurf, mapNeedsRedraw)

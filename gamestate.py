@@ -11,7 +11,7 @@ from pygame.locals import *
 
 from renderer import DISPLAYSURF
 from renderer import WINHEIGHT, WINWIDTH
-from evaluate import evaluateSingleSample
+#from evaluate import evaluateSingleSample
 
 # For textboxes
 COLOR_INACTIVE = pygame.Color('lightskyblue3')
@@ -105,8 +105,10 @@ class InputBox:
                     self.response_script = {}
                     # here is where a character's eliza responds
                     self.response_script[1] = game_state.characters[characterIndex].eliza.respond(self.text)
+                    """
                     if self.response_script[1] == "RUN_NEURAL_NETWORK":
                         self.response_script[1] = evaluateSingleSample('hi there', game_state.beam_size, game_state.encoder, game_state.decoder, game_state.voc)
+                    """
                     self.response_script[1] = re.sub('\<EOS\>', '', self.response_script[1])
                     print(self.response_script[1])
                     self.text = ''

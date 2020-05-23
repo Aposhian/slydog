@@ -3,6 +3,8 @@ Third place project for The Y Hack 2019
 
 Team-members: Aaron Aposhian, Adam Aposhian, Andrew Aposhian, terradactl
 
+![Sly Dog Title Screen](https://raw.githubusercontent.com/Aposhian/slydog/master/assets/Sly%20Dog%20Title%20Screen.png)
+
 ***Derivative work of starpusher by Al Sweigart***
 
 ***This project uses code and a pretrained network from the [pytorch-chatbot](https://github.com/ywk991112/pytorch-chatbot) project by [ywk991112](https://github.com/ywk991112).***

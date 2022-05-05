@@ -1,15 +1,14 @@
+import re
+
 from character import Character
 from pathlib import Path
 import random
 from preprocessor import Preprocessor
-import sys
 import time
-from threading import Timer
 
 import pygame
 from pygame.locals import *
 
-from renderer import DISPLAYSURF
 from renderer import WINHEIGHT, WINWIDTH
 #from evaluate import evaluateSingleSample
 
